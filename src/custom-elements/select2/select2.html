@@ -1,0 +1,7 @@
+
+<template>
+  <select disabled.bind="disabled" class="form-control">
+    <option></option>
+    <option repeat.for="item of items" value.bind="item.id">${item.name}</option>
+  </select>
+</template>

@@ -1,0 +1,4 @@
+﻿template
+  select.form-control(disabled.bind="disabled")
+    option
+    option(repeat.for="item of items" value.bind="item.id") ${item.name}

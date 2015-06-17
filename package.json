@@ -1,19 +1,19 @@
 {
-  "name": "aurelia-app-bootstrap-plugin",
+  "name": "aurelia-custom-common-files",
   "version": "0.0.1",
-  "description": "common files and config for an aurelia app using auth and webtoken",
+  "description": "common files and custom elements for aurelia.io"
   "keywords": [
     "aurelia",
     "authorization",
     "plugin"
   ],
-  "homepage": "http://github.com/moshensky/aurelia-app-bootstrap-plugin",
+  "homepage": "http://github.com/moshensky/aurelia-custom-common-files",
   "license": "MIT",
   "author": "Nikita Moshensky <nikita@moshensky.com> (http://moshensky.com/)",
   "main": "dist/commonjs/index.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/moshensky/aurelia-app-bootstrap-plugin"
+    "url": "http://github.com/moshensky/aurelia-custom-common-files"
   },
   "jspm": {
     "main": "index",

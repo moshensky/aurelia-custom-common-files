@@ -1,7 +1,7 @@
 {
   "name": "aurelia-custom-common-files",
   "version": "0.0.1",
-  "description": "common files and custom elements for aurelia.io"
+  "description": "common files and custom elements for aurelia.io",
   "keywords": [
     "aurelia",
     "authorization",

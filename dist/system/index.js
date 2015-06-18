@@ -12,6 +12,7 @@ System.register(['./config', './utils/table-validation-view-strategy', './utils/
     aurelia.globalizeResources('./custom-elements/datepicker/datepicker');
     aurelia.globalizeResources('./custom-elements/datetimepicker/datetimepicker');
     aurelia.globalizeResources('./custom-elements/select2/select2');
+    aurelia.globalizeResources('./value-converters/date-format');
 
     if (configCallback !== undefined && typeof configCallback === 'function') {
       configCallback(config);

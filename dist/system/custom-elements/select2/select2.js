@@ -79,7 +79,12 @@ System.register(['aurelia-framework', 'jquery', 'select2/select2'], function (_e
         };
 
         _Select2.prototype.itemsChanged = function itemsChanged(newValue, oldValue) {
-          this.value = null;
+          var index = newValue.map(function (x) {
+            return x.id;
+          }).indexOf(this.value);
+          if (index === -1) {
+            this.value = null;
+          }
         };
 
         _Select2.prototype.valueChanged = function valueChanged(newValue, oldValue, opts) {

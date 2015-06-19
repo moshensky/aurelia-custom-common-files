@@ -32,17 +32,17 @@ export class Select2 {
       //Find better way to invoke observable before function!!!
       if (self.initElement === false) {
         setTimeout(function() {
-          self.element.dispatchEvent(new Event("change"));    
+          self.element.dispatchEvent(new Event("change"));
         });
       } else {
-        self.initElement = false; 
+        self.initElement = false;
       }
     });
   }
 
   disabledChanged(newValue) {
     if (newValue) {
- 
+
       this.element.querySelector('select').setAttribute('disabled', 'disabled');
       this.element.classList.add('disabled');
     } else {
@@ -56,7 +56,10 @@ export class Select2 {
   }
 
   itemsChanged(newValue, oldValue) {
-    this.value = null;
+    const index = newValue.map(x => x.id).indexOf(this.value);
+    if (index === -1) {
+      this.value = null;
+    }
   }
 
   valueChanged(newValue, oldValue, opts) {

@@ -79,7 +79,12 @@ var Select2 = (function () {
   };
 
   _Select2.prototype.itemsChanged = function itemsChanged(newValue, oldValue) {
-    this.value = null;
+    var index = newValue.map(function (x) {
+      return x.id;
+    }).indexOf(this.value);
+    if (index === -1) {
+      this.value = null;
+    }
   };
 
   _Select2.prototype.valueChanged = function valueChanged(newValue, oldValue, opts) {

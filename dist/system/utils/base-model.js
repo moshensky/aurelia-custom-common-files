@@ -1,15 +1,13 @@
 System.register([], function (_export) {
-  'use strict';
+  "use strict";
 
-  var excludeProps, BaseModel;
+  var BaseModel;
 
-  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   return {
     setters: [],
     execute: function () {
-      excludeProps = ['router', 'http', 'isInEditMode', 'validation', '_previousValues'];
-
       BaseModel = (function () {
         function BaseModel() {
           _classCallCheck(this, BaseModel);
@@ -40,36 +38,13 @@ System.register([], function (_export) {
           var result = {};
           for (var prop in this) {
             if (this.hasOwnProperty(prop)) {
-              if (excludeProps.indexOf(prop) === -1) {
-                var value = this[prop];
-
-                var isNull = value === null;
-                var isUndefined = value === undefined;
-
-                var isString = !(isNull || isUndefined) && value.constructor === String;
-                var isEmptyString = isString && value.trim() === '';
-                var isNullString = isString && value === 'null';
-                var isUndefinedString = isString && value === 'undefined';
-
-                var hasValue = !(isNull || isUndefined || isEmptyString || isNullString || isUndefinedString);
-
-                if (hasValue) {
-                  var isNumberString = isString && !isEmptyString && !Number.isNaN(Number(value));
-                  var isBooleanString = isString && (value === 'true' || value === 'false');
-
-                  if (isNumberString) {
-                    result[prop] = Number(value);
-                  } else if (isBooleanString) {
-                    result[prop] = value === 'true' ? true : false;
-                  } else {
-                    result[prop] = value;
-                  }
-                } else {
-                  result[prop] = null;
-                }
-              }
+              result[prop] = this[prop];
             }
           }
+
+          delete result.isInEditMode;
+          delete result.validation;
+          delete result._previousValues;
 
           return result;
         };
@@ -77,7 +52,7 @@ System.register([], function (_export) {
         return BaseModel;
       })();
 
-      _export('BaseModel', BaseModel);
+      _export("BaseModel", BaseModel);
     }
   };
 });

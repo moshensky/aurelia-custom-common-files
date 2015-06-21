@@ -48,24 +48,26 @@ System.register(['aurelia-framework', 'jquery', 'select2/select2'], function (_e
           var $select = $(select);
           $select.css('width', '100%');
           this.select2 = $select.select2(options);
+          this.oldSelect2Value = undefined;
           var self = this;
 
           this.select2.on('change', function (event) {
-            self.value = self.select2.val();
-
-            if (self.initElement === false) {
-              setTimeout(function () {
-                self.element.dispatchEvent(new Event('change'));
-              });
-            } else {
-              self.initElement = false;
+            self.value = parseInt(self.select2.val(), 10);
+            if (self.oldSelect2Value !== self.value) {
+              self.oldSelect2Value = self.value;
+              if (self.initElement === false) {
+                setTimeout(function () {
+                  self.element.dispatchEvent(new Event('change'));
+                });
+              } else {
+                self.initElement = false;
+              }
             }
           });
         };
 
         _Select2.prototype.disabledChanged = function disabledChanged(newValue) {
           if (newValue) {
-
             this.element.querySelector('select').setAttribute('disabled', 'disabled');
             this.element.classList.add('disabled');
           } else {
@@ -107,28 +109,28 @@ System.register(['aurelia-framework', 'jquery', 'select2/select2'], function (_e
         _createDecoratedClass(_Select2, [{
           key: 'items',
           decorators: [bindable],
-          initializer: function () {
+          initializer: function initializer() {
             return null;
           },
           enumerable: true
         }, {
           key: 'caption',
           decorators: [bindable],
-          initializer: function () {
+          initializer: function initializer() {
             return null;
           },
           enumerable: true
         }, {
           key: 'value',
           decorators: [bindable],
-          initializer: function () {
+          initializer: function initializer() {
             return null;
           },
           enumerable: true
         }, {
           key: 'disabled',
           decorators: [bindable],
-          initializer: function () {
+          initializer: function initializer() {
             return false;
           },
           enumerable: true

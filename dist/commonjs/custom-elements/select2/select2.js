@@ -53,6 +53,10 @@ var Select2 = (function () {
 
     this.select2.on('change', function (event) {
       self.value = parseInt(self.select2.val(), 10);
+      if (isNaN(self.value)) {
+        self.value = null;
+      }
+
       if (self.oldSelect2Value !== self.value) {
         self.oldSelect2Value = self.value;
         if (self.initElement === false) {

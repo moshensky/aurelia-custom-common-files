@@ -9,7 +9,7 @@ import moment from 'moment';
 export class Datepicker {
     @bindable value = null;
     @bindable options = null;
-    @bindalbe disabled = false;
+    @bindable disabled = false;
 
     constructor(element) {
         this.element = element;

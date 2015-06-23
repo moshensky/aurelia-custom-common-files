@@ -108,7 +108,7 @@ var Datepicker = (function () {
         enumerable: true
     }, {
         key: 'disabled',
-        decorators: [bindalbe],
+        decorators: [_aureliaFramework.bindable],
         initializer: function initializer() {
             return false;
         },

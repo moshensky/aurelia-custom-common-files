@@ -104,7 +104,7 @@ System.register(['aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepick
                     enumerable: true
                 }, {
                     key: 'disabled',
-                    decorators: [bindalbe],
+                    decorators: [bindable],
                     initializer: function initializer() {
                         return false;
                     },

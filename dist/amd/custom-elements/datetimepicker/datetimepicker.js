@@ -99,7 +99,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             enumerable: true
         }, {
             key: 'disabled',
-            decorators: [bindalbe],
+            decorators: [_aureliaFramework.bindable],
             initializer: function initializer() {
                 return false;
             },

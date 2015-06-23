@@ -25,6 +25,8 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
 
             _defineDecoratedPropertyDescriptor(this, 'options', _instanceInitializers);
 
+            _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
+
             this.element = element;
         }
 
@@ -93,6 +95,13 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             decorators: [_aureliaFramework.bindable],
             initializer: function initializer() {
                 return null;
+            },
+            enumerable: true
+        }, {
+            key: 'disabled',
+            decorators: [_aureliaFramework.bindable],
+            initializer: function initializer() {
+                return false;
             },
             enumerable: true
         }], null, _instanceInitializers);

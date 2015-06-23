@@ -70,16 +70,6 @@ System.register(['aurelia-framework', 'jquery', 'select2/select2'], function (_e
           });
         };
 
-        _Select2.prototype.disabledChanged = function disabledChanged(newValue) {
-          if (newValue) {
-            this.element.querySelector('select').setAttribute('disabled', 'disabled');
-            this.element.classList.add('disabled');
-          } else {
-            this.element.querySelector('select').removeAttribute('disabled', 'disabled');
-            this.element.classList.remove('disabled');
-          }
-        };
-
         _Select2.prototype.attached = function attached() {
           this.valueChanged(this.value);
         };

@@ -30,6 +30,8 @@ System.register(['aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepick
 
                     _defineDecoratedPropertyDescriptor(this, 'options', _instanceInitializers);
 
+                    _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
+
                     this.element = element;
                 }
 
@@ -98,6 +100,13 @@ System.register(['aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepick
                     decorators: [bindable],
                     initializer: function initializer() {
                         return null;
+                    },
+                    enumerable: true
+                }, {
+                    key: 'disabled',
+                    decorators: [bindalbe],
+                    initializer: function initializer() {
+                        return false;
                     },
                     enumerable: true
                 }], null, _instanceInitializers);

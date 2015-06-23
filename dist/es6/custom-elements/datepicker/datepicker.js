@@ -9,6 +9,7 @@ import moment from 'moment';
 export class Datepicker {
     @bindable value = null;
     @bindable options = null;
+    @bindable disabled = false;
 
     constructor(element) {
         this.element = element;
@@ -39,13 +40,13 @@ export class Datepicker {
             this.value = event.date;
             //Find better way to invoke observable before function!!!
             setTimeout(function() {
-              self.element.dispatchEvent(new Event("change"));    
+              self.element.dispatchEvent(new Event("change"));
             });
         });
 
         this.valueChanged(this.value);
     }
-    
+
     valueChanged(newValue, oldValue) {
         if (newValue === undefined) {
             throw new Error('Do not use undefined!');
@@ -61,7 +62,7 @@ export class Datepicker {
             throw new Error('This has to be moment type!');
         }
 
-        if (newValue.isSame(oldValue)) { 
+        if (newValue.isSame(oldValue)) {
             return;
         }
 

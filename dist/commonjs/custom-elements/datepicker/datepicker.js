@@ -34,6 +34,8 @@ var Datepicker = (function () {
 
         _defineDecoratedPropertyDescriptor(this, 'options', _instanceInitializers);
 
+        _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
+
         this.element = element;
     }
 
@@ -107,6 +109,13 @@ var Datepicker = (function () {
         decorators: [_aureliaFramework.bindable],
         initializer: function initializer() {
             return null;
+        },
+        enumerable: true
+    }, {
+        key: 'disabled',
+        decorators: [_aureliaFramework.bindable],
+        initializer: function initializer() {
+            return false;
         },
         enumerable: true
     }], null, _instanceInitializers);

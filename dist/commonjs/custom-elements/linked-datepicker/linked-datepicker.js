@@ -22,10 +22,6 @@ var LinkedDatePickers = (function () {
     function LinkedDatePickers(element) {
         _classCallCheck(this, _LinkedDatePickers);
 
-        _defineDecoratedPropertyDescriptor(this, 'start', _instanceInitializers);
-
-        _defineDecoratedPropertyDescriptor(this, 'end', _instanceInitializers);
-
         _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
 
         this.element = element;
@@ -49,22 +45,16 @@ var LinkedDatePickers = (function () {
     };
 
     _createDecoratedClass(_LinkedDatePickers, [{
-        key: 'start',
-        decorators: [_aureliaFramework.bindable],
-        initializer: function initializer() {
-            return _moment2['default'](new Date());
-        },
-        enumerable: true
-    }, {
-        key: 'end',
-        decorators: [_aureliaFramework.bindable],
-        initializer: function initializer() {
-            return _moment2['default'](new Date());
-        },
-        enumerable: true
-    }, {
         key: 'disabled',
-        decorators: [_aureliaFramework.bindable],
+        decorators: [_aureliaFramework.bindable, _aureliaFramework.bindable({
+            name: 'end',
+            attribute: 'end',
+            defaultBindingMode: bindingMode.twoWay,
+            defaultValue: _moment2['default'](new Date()) }), _aureliaFramework.bindable({
+            name: 'start',
+            attribute: 'start',
+            defaultBindingMode: bindingMode.twoWay,
+            defaultValue: _moment2['default'](new Date()) })],
         initializer: function initializer() {
             return false;
         },

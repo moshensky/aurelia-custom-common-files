@@ -24,6 +24,10 @@ System.register(['aurelia-framework', 'moment'], function (_export) {
                 function LinkedDatePickers(element) {
                     _classCallCheck(this, _LinkedDatePickers);
 
+                    _defineDecoratedPropertyDescriptor(this, 'start', _instanceInitializers);
+
+                    _defineDecoratedPropertyDescriptor(this, 'end', _instanceInitializers);
+
                     _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
 
                     this.element = element;
@@ -47,6 +51,20 @@ System.register(['aurelia-framework', 'moment'], function (_export) {
                 };
 
                 _createDecoratedClass(_LinkedDatePickers, [{
+                    key: 'start',
+                    decorators: [bindable],
+                    initializer: function initializer() {
+                        return moment(new Date());
+                    },
+                    enumerable: true
+                }, {
+                    key: 'end',
+                    decorators: [bindable],
+                    initializer: function initializer() {
+                        return moment(new Date());
+                    },
+                    enumerable: true
+                }, {
                     key: 'disabled',
                     decorators: [bindable],
                     initializer: function initializer() {
@@ -55,16 +73,6 @@ System.register(['aurelia-framework', 'moment'], function (_export) {
                     enumerable: true
                 }], null, _instanceInitializers);
 
-                LinkedDatePickers = bindable({
-                    name: 'end',
-                    attribute: 'end',
-                    defaultBindingMode: bindingMode.twoWay,
-                    defaultValue: moment(new Date()) })(LinkedDatePickers) || LinkedDatePickers;
-                LinkedDatePickers = bindable({
-                    name: 'start',
-                    attribute: 'start',
-                    defaultBindingMode: bindingMode.twoWay,
-                    defaultValue: moment(new Date()) })(LinkedDatePickers) || LinkedDatePickers;
                 LinkedDatePickers = inject(Element)(LinkedDatePickers) || LinkedDatePickers;
                 LinkedDatePickers = customElement('linked-datepickers')(LinkedDatePickers) || LinkedDatePickers;
                 return LinkedDatePickers;

@@ -19,6 +19,10 @@ define(['exports', 'aurelia-framework', 'moment'], function (exports, _aureliaFr
         function LinkedDatePickers(element) {
             _classCallCheck(this, _LinkedDatePickers);
 
+            _defineDecoratedPropertyDescriptor(this, 'start', _instanceInitializers);
+
+            _defineDecoratedPropertyDescriptor(this, 'end', _instanceInitializers);
+
             _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
 
             this.element = element;
@@ -42,6 +46,20 @@ define(['exports', 'aurelia-framework', 'moment'], function (exports, _aureliaFr
         };
 
         _createDecoratedClass(_LinkedDatePickers, [{
+            key: 'start',
+            decorators: [_aureliaFramework.bindable],
+            initializer: function initializer() {
+                return _moment2['default'](new Date());
+            },
+            enumerable: true
+        }, {
+            key: 'end',
+            decorators: [_aureliaFramework.bindable],
+            initializer: function initializer() {
+                return _moment2['default'](new Date());
+            },
+            enumerable: true
+        }, {
             key: 'disabled',
             decorators: [_aureliaFramework.bindable],
             initializer: function initializer() {
@@ -50,16 +68,6 @@ define(['exports', 'aurelia-framework', 'moment'], function (exports, _aureliaFr
             enumerable: true
         }], null, _instanceInitializers);
 
-        LinkedDatePickers = _aureliaFramework.bindable({
-            name: 'end',
-            attribute: 'end',
-            defaultBindingMode: bindingMode.twoWay,
-            defaultValue: _moment2['default'](new Date()) })(LinkedDatePickers) || LinkedDatePickers;
-        LinkedDatePickers = _aureliaFramework.bindable({
-            name: 'start',
-            attribute: 'start',
-            defaultBindingMode: bindingMode.twoWay,
-            defaultValue: _moment2['default'](new Date()) })(LinkedDatePickers) || LinkedDatePickers;
         LinkedDatePickers = _aureliaFramework.inject(Element)(LinkedDatePickers) || LinkedDatePickers;
         LinkedDatePickers = _aureliaFramework.customElement('linked-datepickers')(LinkedDatePickers) || LinkedDatePickers;
         return LinkedDatePickers;

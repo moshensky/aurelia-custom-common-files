@@ -56,12 +56,12 @@ var LinkedDatePicker = (function () {
     LinkedDatePicker = _aureliaFramework.bindable({
         name: 'end',
         attribute: 'end',
-        defaultBindingMode: bindingMode.twoWay,
+        defaultBindingMode: _aureliaFramework.bindingMode.twoWay,
         defaultValue: _moment2['default'](new Date()) })(LinkedDatePicker) || LinkedDatePicker;
     LinkedDatePicker = _aureliaFramework.bindable({
         name: 'start',
         attribute: 'start',
-        defaultBindingMode: bindingMode.twoWay,
+        defaultBindingMode: _aureliaFramework.bindingMode.twoWay,
         defaultValue: _moment2['default'](new Date()) })(LinkedDatePicker) || LinkedDatePicker;
     LinkedDatePicker = _aureliaFramework.inject(Element)(LinkedDatePicker) || LinkedDatePicker;
     LinkedDatePicker = _aureliaFramework.customElement('linked-datepicker')(LinkedDatePicker) || LinkedDatePicker;

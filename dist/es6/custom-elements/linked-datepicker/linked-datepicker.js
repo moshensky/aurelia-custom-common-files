@@ -1,7 +1,7 @@
 import {inject, customElement, bindable} from 'aurelia-framework';
 import moment from 'moment';
 
-@customElement('linked-datepickers')
+@customElement('linked-datepicker')
 @inject(Element)
 @bindable({
 name:'start', //name of the property on the class
@@ -15,7 +15,7 @@ attribute:'end', //name of the attribute in HTML
 defaultBindingMode: bindingMode.twoWay, //default binding mode used with the .bind command
 defaultValue: moment(new Date()) //default value of the property, if not bound or set in HTML
 })
-export class LinkedDatePickers {
+export class LinkedDatePicker {
 
     @bindable disabled = false;
 

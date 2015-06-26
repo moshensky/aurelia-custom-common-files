@@ -3,19 +3,20 @@ import moment from 'moment';
 
 @customElement('linked-datepickers')
 @inject(Element)
-export class LinkedDatePickers {
-    @bindable({
-  name:'start', //name of the property on the class
-  attribute:'start', //name of the attribute in HTML
-  defaultBindingMode: bindingMode.twoWay, //default binding mode used with the .bind command
-  defaultValue: moment(new Date()) //default value of the property, if not bound or set in HTML
+@bindable({
+name:'start', //name of the property on the class
+attribute:'start', //name of the attribute in HTML
+defaultBindingMode: bindingMode.twoWay, //default binding mode used with the .bind command
+defaultValue: moment(new Date()) //default value of the property, if not bound or set in HTML
 })
 @bindable({
-  name:'end', //name of the property on the class
-  attribute:'end', //name of the attribute in HTML
-  defaultBindingMode: bindingMode.twoWay, //default binding mode used with the .bind command
-  defaultValue: moment(new Date()) //default value of the property, if not bound or set in HTML
+name:'end', //name of the property on the class
+attribute:'end', //name of the attribute in HTML
+defaultBindingMode: bindingMode.twoWay, //default binding mode used with the .bind command
+defaultValue: moment(new Date()) //default value of the property, if not bound or set in HTML
 })
+export class LinkedDatePickers {
+
     @bindable disabled = false;
 
     constructor(element) {

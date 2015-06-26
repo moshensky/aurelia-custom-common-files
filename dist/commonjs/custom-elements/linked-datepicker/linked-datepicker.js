@@ -46,21 +46,23 @@ var LinkedDatePickers = (function () {
 
     _createDecoratedClass(_LinkedDatePickers, [{
         key: 'disabled',
-        decorators: [_aureliaFramework.bindable, _aureliaFramework.bindable({
-            name: 'end',
-            attribute: 'end',
-            defaultBindingMode: bindingMode.twoWay,
-            defaultValue: _moment2['default'](new Date()) }), _aureliaFramework.bindable({
-            name: 'start',
-            attribute: 'start',
-            defaultBindingMode: bindingMode.twoWay,
-            defaultValue: _moment2['default'](new Date()) })],
+        decorators: [_aureliaFramework.bindable],
         initializer: function initializer() {
             return false;
         },
         enumerable: true
     }], null, _instanceInitializers);
 
+    LinkedDatePickers = _aureliaFramework.bindable({
+        name: 'end',
+        attribute: 'end',
+        defaultBindingMode: bindingMode.twoWay,
+        defaultValue: _moment2['default'](new Date()) })(LinkedDatePickers) || LinkedDatePickers;
+    LinkedDatePickers = _aureliaFramework.bindable({
+        name: 'start',
+        attribute: 'start',
+        defaultBindingMode: bindingMode.twoWay,
+        defaultValue: _moment2['default'](new Date()) })(LinkedDatePickers) || LinkedDatePickers;
     LinkedDatePickers = _aureliaFramework.inject(Element)(LinkedDatePickers) || LinkedDatePickers;
     LinkedDatePickers = _aureliaFramework.customElement('linked-datepickers')(LinkedDatePickers) || LinkedDatePickers;
     return LinkedDatePickers;

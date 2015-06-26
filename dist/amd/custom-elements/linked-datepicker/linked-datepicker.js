@@ -43,23 +43,21 @@ define(['exports', 'aurelia-framework', 'moment'], function (exports, _aureliaFr
 
         _createDecoratedClass(_LinkedDatePicker, [{
             key: 'disabled',
-            decorators: [_aureliaFramework.bindable],
+            decorators: [_aureliaFramework.bindable, _aureliaFramework.bindable({
+                name: 'end',
+                attribute: 'end',
+                defaultBindingMode: _aureliaFramework.bindingMode.twoWay,
+                defaultValue: _moment2['default'](new Date()) }), _aureliaFramework.bindable({
+                name: 'start',
+                attribute: 'start',
+                defaultBindingMode: _aureliaFramework.bindingMode.twoWay,
+                defaultValue: _moment2['default'](new Date()) })],
             initializer: function initializer() {
                 return false;
             },
             enumerable: true
         }], null, _instanceInitializers);
 
-        LinkedDatePicker = _aureliaFramework.bindable({
-            name: 'end',
-            attribute: 'end',
-            defaultBindingMode: _aureliaFramework.bindingMode.twoWay,
-            defaultValue: _moment2['default'](new Date()) })(LinkedDatePicker) || LinkedDatePicker;
-        LinkedDatePicker = _aureliaFramework.bindable({
-            name: 'start',
-            attribute: 'start',
-            defaultBindingMode: _aureliaFramework.bindingMode.twoWay,
-            defaultValue: _moment2['default'](new Date()) })(LinkedDatePicker) || LinkedDatePicker;
         LinkedDatePicker = _aureliaFramework.inject(Element)(LinkedDatePicker) || LinkedDatePicker;
         LinkedDatePicker = _aureliaFramework.customElement('linked-datepicker')(LinkedDatePicker) || LinkedDatePicker;
         return LinkedDatePicker;

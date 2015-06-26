@@ -49,23 +49,21 @@ System.register(['aurelia-framework', 'moment'], function (_export) {
 
                 _createDecoratedClass(_LinkedDatePicker, [{
                     key: 'disabled',
-                    decorators: [bindable],
+                    decorators: [bindable, bindable({
+                        name: 'end',
+                        attribute: 'end',
+                        defaultBindingMode: bindingMode.twoWay,
+                        defaultValue: moment(new Date()) }), bindable({
+                        name: 'start',
+                        attribute: 'start',
+                        defaultBindingMode: bindingMode.twoWay,
+                        defaultValue: moment(new Date()) })],
                     initializer: function initializer() {
                         return false;
                     },
                     enumerable: true
                 }], null, _instanceInitializers);
 
-                LinkedDatePicker = bindable({
-                    name: 'end',
-                    attribute: 'end',
-                    defaultBindingMode: bindingMode.twoWay,
-                    defaultValue: moment(new Date()) })(LinkedDatePicker) || LinkedDatePicker;
-                LinkedDatePicker = bindable({
-                    name: 'start',
-                    attribute: 'start',
-                    defaultBindingMode: bindingMode.twoWay,
-                    defaultValue: moment(new Date()) })(LinkedDatePicker) || LinkedDatePicker;
                 LinkedDatePicker = inject(Element)(LinkedDatePicker) || LinkedDatePicker;
                 LinkedDatePicker = customElement('linked-datepicker')(LinkedDatePicker) || LinkedDatePicker;
                 return LinkedDatePicker;

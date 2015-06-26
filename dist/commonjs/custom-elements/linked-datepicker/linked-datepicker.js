@@ -17,63 +17,67 @@ var _moment = require('moment');
 var _moment2 = _interopRequireDefault(_moment);
 
 var LinkedDatePicker = (function () {
-    var _instanceInitializers = {};
+  var _instanceInitializers = {};
 
-    function LinkedDatePicker(element) {
-        _classCallCheck(this, _LinkedDatePicker);
+  function LinkedDatePicker(element) {
+    _classCallCheck(this, _LinkedDatePicker);
 
-        _defineDecoratedPropertyDescriptor(this, 'start', _instanceInitializers);
+    _defineDecoratedPropertyDescriptor(this, 'start', _instanceInitializers);
 
-        _defineDecoratedPropertyDescriptor(this, 'end', _instanceInitializers);
+    _defineDecoratedPropertyDescriptor(this, 'end', _instanceInitializers);
 
-        _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
+    _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
 
-        this.element = element;
-    }
+    this.element = element;
+  }
 
-    var _LinkedDatePicker = LinkedDatePicker;
+  var _LinkedDatePicker = LinkedDatePicker;
 
-    _LinkedDatePicker.prototype.attached = function attached() {
-        var _this = this;
+  _LinkedDatePicker.prototype.attached = function attached() {
+    var _this = this;
 
-        var self = this;
-        this.datepicker1.datepicker.$element.on('dp.change', function (event) {
-            self.start = event.date;
-            _this.datepicker2.datepicker.$element.data('DateTimePicker').minDate(event.date);
-        });
+    var self = this;
+    this.datepicker1.datepicker.$element.on('dp.change', function (event) {
+      if (event.date) {
+        self.start = event.date;
+        _this.datepicker2.datepicker.$element.data('DateTimePicker').minDate(event.date);
+      }
+    });
 
-        this.datepicker2.datepicker.$element.on('dp.change', function (event) {
-            self.end = event.date;
-            _this.datepicker1.datepicker.$element.data('DateTimePicker').maxDate(event.date);
-        });
-    };
+    this.datepicker2.datepicker.$element.on('dp.change', function (event) {
+      if (event.date) {
+        self.end = event.date;
+        _this.datepicker1.datepicker.$element.data('DateTimePicker').maxDate(event.date);
+      }
+    });
+  };
 
-    _createDecoratedClass(_LinkedDatePicker, [{
-        key: 'start',
-        decorators: [_aureliaFramework.bindable],
-        initializer: function initializer() {
-            return _moment2['default'](new Date());
-        },
-        enumerable: true
-    }, {
-        key: 'end',
-        decorators: [_aureliaFramework.bindable],
-        initializer: function initializer() {
-            return _moment2['default'](new Date());
-        },
-        enumerable: true
-    }, {
-        key: 'disabled',
-        decorators: [_aureliaFramework.bindable],
-        initializer: function initializer() {
-            return false;
-        },
-        enumerable: true
-    }], null, _instanceInitializers);
+  _createDecoratedClass(_LinkedDatePicker, [{
+    key: 'start',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function initializer() {
+      return _moment2['default'](new Date());
+    },
+    enumerable: true
+  }, {
+    key: 'end',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function initializer() {
+      return _moment2['default'](new Date());
+    },
+    enumerable: true
+  }, {
+    key: 'disabled',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function initializer() {
+      return false;
+    },
+    enumerable: true
+  }], null, _instanceInitializers);
 
-    LinkedDatePicker = _aureliaFramework.inject(Element)(LinkedDatePicker) || LinkedDatePicker;
-    LinkedDatePicker = _aureliaFramework.customElement('linked-datepicker')(LinkedDatePicker) || LinkedDatePicker;
-    return LinkedDatePicker;
+  LinkedDatePicker = _aureliaFramework.inject(Element)(LinkedDatePicker) || LinkedDatePicker;
+  LinkedDatePicker = _aureliaFramework.customElement('linked-datepicker')(LinkedDatePicker) || LinkedDatePicker;
+  return LinkedDatePicker;
 })();
 
 exports.LinkedDatePicker = LinkedDatePicker;

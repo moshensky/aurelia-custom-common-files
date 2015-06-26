@@ -28,13 +28,17 @@ export class LinkedDatePicker {
     attached() {
       var self = this;
       this.datepicker1.datepicker.$element.on('dp.change', (event) => {
-           self.start = event.date;
+        if (event.date) {
+          self.start = event.date;
           this.datepicker2.datepicker.$element.data('DateTimePicker').minDate(event.date);
+        }
       });
 
       this.datepicker2.datepicker.$element.on('dp.change', (event) => {
-           self.end = event.date;
-        this.datepicker1.datepicker.$element.data('DateTimePicker').maxDate(event.date);
+        if (event.date) {
+          self.end = event.date;
+          this.datepicker1.datepicker.$element.data('DateTimePicker').maxDate(event.date);
+        }
       });
     }
 }

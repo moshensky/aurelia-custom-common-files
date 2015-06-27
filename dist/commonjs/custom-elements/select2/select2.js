@@ -32,6 +32,8 @@ var Select2 = (function () {
 
     _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
 
+    _defineDecoratedPropertyDescriptor(this, 'options', _instanceInitializers);
+
     this.element = element;
   }
 
@@ -40,10 +42,10 @@ var Select2 = (function () {
   _Select2.prototype.bind = function bind() {
     var select = this.element.firstElementChild;
 
-    var options = {
+    var options = Object.assign(this.options, {
       placeholder: this.caption,
       allowClear: true
-    };
+    });
 
     var $select = _jquery2['default'](select);
     $select.css('width', '100%');
@@ -126,6 +128,13 @@ var Select2 = (function () {
     decorators: [_aureliaFramework.bindable],
     initializer: function initializer() {
       return false;
+    },
+    enumerable: true
+  }, {
+    key: 'options',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function initializer() {
+      return {};
     },
     enumerable: true
   }], null, _instanceInitializers);

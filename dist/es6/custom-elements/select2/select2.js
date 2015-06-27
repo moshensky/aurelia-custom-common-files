@@ -9,18 +9,19 @@ export class Select2 {
   @bindable caption = null;
   @bindable value = null;
   @bindable disabled = false;
+  @bindable options = {};
 
   constructor(element) {
     this.element = element;
   }
 
   bind() {
-    var select = this.element.firstElementChild;
+    let select = this.element.firstElementChild;
 
-    var options = {
+    let options = Object.assign(this.options, {
       placeholder: this.caption,
       allowClear: true
-    };
+    });
 
     const $select = $(select);
     $select.css('width', '100%');

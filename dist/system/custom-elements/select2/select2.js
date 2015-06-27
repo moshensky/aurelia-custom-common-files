@@ -32,6 +32,8 @@ System.register(['aurelia-framework', 'jquery', 'select2/select2'], function (_e
 
           _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
 
+          _defineDecoratedPropertyDescriptor(this, 'options', _instanceInitializers);
+
           this.element = element;
         }
 
@@ -40,10 +42,10 @@ System.register(['aurelia-framework', 'jquery', 'select2/select2'], function (_e
         _Select2.prototype.bind = function bind() {
           var select = this.element.firstElementChild;
 
-          var options = {
+          var options = Object.assign(this.options, {
             placeholder: this.caption,
             allowClear: true
-          };
+          });
 
           var $select = $(select);
           $select.css('width', '100%');
@@ -126,6 +128,13 @@ System.register(['aurelia-framework', 'jquery', 'select2/select2'], function (_e
           decorators: [bindable],
           initializer: function initializer() {
             return false;
+          },
+          enumerable: true
+        }, {
+          key: 'options',
+          decorators: [bindable],
+          initializer: function initializer() {
+            return {};
           },
           enumerable: true
         }], null, _instanceInitializers);

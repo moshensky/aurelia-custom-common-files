@@ -42,10 +42,10 @@ var Select2 = (function () {
   _Select2.prototype.bind = function bind() {
     var select = this.element.firstElementChild;
 
-    var options = Object.assign(this.options, {
+    var options = Object.assign({
       placeholder: this.caption,
       allowClear: true
-    });
+    }, this.options);
 
     var $select = _jquery2['default'](select);
     $select.css('width', '100%');

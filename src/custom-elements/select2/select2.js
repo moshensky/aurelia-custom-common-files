@@ -18,10 +18,10 @@ export class Select2 {
   bind() {
     let select = this.element.firstElementChild;
 
-    let options = Object.assign(this.options, {
+    let options = Object.assign({
       placeholder: this.caption,
       allowClear: true
-    });
+    }, this.options);
 
     const $select = $(select);
     $select.css('width', '100%');

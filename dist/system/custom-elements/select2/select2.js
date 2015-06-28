@@ -42,10 +42,10 @@ System.register(['aurelia-framework', 'jquery', 'select2/select2'], function (_e
         _Select2.prototype.bind = function bind() {
           var select = this.element.firstElementChild;
 
-          var options = Object.assign(this.options, {
+          var options = Object.assign({
             placeholder: this.caption,
             allowClear: true
-          });
+          }, this.options);
 
           var $select = $(select);
           $select.css('width', '100%');

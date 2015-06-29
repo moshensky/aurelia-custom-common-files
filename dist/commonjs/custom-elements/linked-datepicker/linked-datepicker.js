@@ -38,14 +38,14 @@ var LinkedDatePicker = (function () {
 
     var self = this;
     this.datepicker1.datepicker.$element.on('dp.change', function (event) {
-      if (event.date) {
+      if (event) {
         self.start = event.date;
         _this.datepicker2.datepicker.$element.data('DateTimePicker').minDate(event.date);
       }
     });
 
     this.datepicker2.datepicker.$element.on('dp.change', function (event) {
-      if (event.date) {
+      if (event) {
         self.end = event.date;
         _this.datepicker1.datepicker.$element.data('DateTimePicker').maxDate(event.date);
       }

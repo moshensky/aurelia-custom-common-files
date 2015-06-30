@@ -1,4 +1,4 @@
-import {inject, customElement, bindable} from 'aurelia-framework';
+import {inject, customElement, bindable, bindingMode} from 'aurelia-framework';
 import moment from 'moment';
 
 @customElement('linked-datepicker')

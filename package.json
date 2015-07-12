@@ -23,18 +23,20 @@
     },
     "dependencies": {
       "Eonasdan/bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker@^4.14.30",
-      "aurelia-dependency-injection": "github:aurelia/dependency-injection@^0.8.1",
-      "aurelia-framework": "github:aurelia/framework@^0.12.0",
-      "aurelia-validation": "github:aurelia/validation@^0.2.5",
+      "aurelia-dependency-injection": "github:aurelia/dependency-injection@^0.9.0",
+      "aurelia-framework": "github:aurelia/framework@^0.13.2",
+      "aurelia-validation": "github:aurelia/validation@^0.2.7",
       "jquery": "github:components/jquery@^2.1.4",
       "moment": "github:moment/moment@^2.10.3",
-      "select2/select2": "github:select2/select2@^4.0.0"
+      "select2/select2": "github:select2/select2@^4.0.0",
+      "traceur": "github:jmcriffey/bower-traceur@^0.0.90",
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@^0.0.90"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.1.13",
       "babel-runtime": "npm:babel-runtime@^5.1.13",
       "core-js": "npm:core-js@^0.9.4",
-      "traceur": "github:jmcriffey/bower-traceur@0.0.88",
+      "traceur": "github:jmcriffey/bower-traceur@^0.0.90",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
     }
   },

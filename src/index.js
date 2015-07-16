@@ -11,6 +11,7 @@ export function configure(aurelia, configCallback) {
   aurelia.globalizeResources('./custom-elements/datepicker/datepicker');
   aurelia.globalizeResources('./custom-elements/datetimepicker/datetimepicker');
   aurelia.globalizeResources('./custom-elements/select2/select2');
+  aurelia.globalizeResources('./custom-elements/select2/select2-ajax');
 
   aurelia.globalizeResources('./custom-attributes/enable');
 

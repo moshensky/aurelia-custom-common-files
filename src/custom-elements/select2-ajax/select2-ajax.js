@@ -57,7 +57,13 @@ export class Select2Ajax {
         let self = this;
         function request () {
           if (params.term !== undefined && params.term.length > self.ajaxOptions.minimumInputLength) {
-            let req = select2this.http.get(`${self.ajaxOptions.url}?q=${params.term}`);
+
+            let url = self.ajaxOptions.url || self.ajaxOptions.getUrl();
+            if (url === undefined) {
+              throw new Error("Configuration exception! select2-ajax, must have defined options.ajax.url or options.ajax.getUrl()!");
+            }
+
+            let req = select2this.http.get(`${url}?q=${params.term}`);
             req.then((data) => {
               data = data.map(d => {
                 d.text = d.name;

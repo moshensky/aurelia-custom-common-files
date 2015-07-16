@@ -76,7 +76,13 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
           var self = this;
           function request() {
             if (params.term !== undefined && params.term.length > self.ajaxOptions.minimumInputLength) {
-              var req = select2this.http.get(self.ajaxOptions.url + '?q=' + params.term);
+
+              var url = self.ajaxOptions.url || self.ajaxOptions.getUrl();
+              if (url === undefined) {
+                throw new Error('Configuration exception! select2-ajax, must have defined options.ajax.url or options.ajax.getUrl()!');
+              }
+
+              var req = select2this.http.get(url + '?q=' + params.term);
               req.then(function (data) {
                 data = data.map(function (d) {
                   d.text = d.name;

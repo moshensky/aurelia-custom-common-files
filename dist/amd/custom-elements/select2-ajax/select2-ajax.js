@@ -27,6 +27,8 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
 
       _defineDecoratedPropertyDescriptor(this, 'options', _instanceInitializers);
 
+      _defineDecoratedPropertyDescriptor(this, 'clear', _instanceInitializers);
+
       this.element = element;
       this.http = http;
     }
@@ -107,15 +109,17 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
 
         var select = _this.element.firstElementChild;
 
-        var options = Object.assign({
+        var options = {
           dataAdapter: AjaxAdapter,
           placeholder: _this.caption,
-          allowClear: true
-        }, _this.options);
+          allowClear: true,
+          ajax: _this.options
+        };
 
         var $select = _$['default'](select);
         $select.css('width', '100%');
         _this.select2 = $select.select2(options);
+        _this._select2control = $select.data('select2');
         _this.oldSelect2Value = undefined;
         var self = _this;
 
@@ -137,6 +141,10 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
           }
         });
       });
+    };
+
+    _Select2Ajax.prototype.clearChanged = function clearChanged() {
+      this._select2control.results.clear();
     };
 
     _Select2Ajax.prototype.attached = function attached() {};
@@ -190,6 +198,13 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
       enumerable: true
     }, {
       key: 'options',
+      decorators: [_aureliaFramework.bindable],
+      initializer: function initializer() {
+        return {};
+      },
+      enumerable: true
+    }, {
+      key: 'clear',
       decorators: [_aureliaFramework.bindable],
       initializer: function initializer() {
         return {};

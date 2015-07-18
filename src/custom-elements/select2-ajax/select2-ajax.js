@@ -10,6 +10,7 @@ export class Select2Ajax {
   @bindable value = null;
   @bindable disabled = false;
   @bindable options = {};
+  @bindable clear = {};
 
   constructor(element, http) {
     this.element = element;
@@ -89,15 +90,17 @@ export class Select2Ajax {
 
       let select = this.element.firstElementChild;
 
-      let options = Object.assign({
+      let options = {
         dataAdapter: AjaxAdapter,
         placeholder: this.caption,
-        allowClear: true
-      }, this.options);
+        allowClear: true,
+        ajax: this.options
+      };
 
       const $select = $(select);
       $select.css('width', '100%');
       this.select2 = $select.select2(options);
+      this._select2control = $select.data('select2');
       this.oldSelect2Value = undefined;
       var self = this;
 
@@ -119,6 +122,10 @@ export class Select2Ajax {
         }
       });
     });
+  }
+
+  clearChanged() {
+    this._select2control.results.clear();
   }
 
   attached() {

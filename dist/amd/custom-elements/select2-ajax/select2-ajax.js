@@ -76,6 +76,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
 
         AjaxAdapter.prototype.query = function (params, callback) {
           var self = this;
+
           function request() {
             if (params.term !== undefined && params.term.length > self.ajaxOptions.minimumInputLength) {
 
@@ -119,25 +120,22 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
         var $select = _$['default'](select);
         $select.css('width', '100%');
         _this.select2 = $select.select2(options);
+        _this.$select = $select;
         _this._select2control = $select.data('select2');
         _this.oldSelect2Value = undefined;
         var self = _this;
 
         _this.select2.on('change', function (event) {
-          self.value = parseInt(self.select2.val(), 10);
-          if (isNaN(self.value)) {
-            self.value = null;
+          select2this.value = parseInt(select2this.select2.val(), 10);
+          if (isNaN(select2this.value)) {
+            select2this.value = undefined;
           }
 
-          if (self.oldSelect2Value !== self.value) {
-            self.oldSelect2Value = self.value;
-            if (self.initElement === false) {
-              setTimeout(function () {
-                self.element.dispatchEvent(new Event('change'));
-              });
-            } else {
-              self.initElement = false;
-            }
+          if (select2this.oldSelect2Value !== select2this.value) {
+            select2this.oldSelect2Value = select2this.value;
+            setTimeout(function () {
+              select2this.element.dispatchEvent(new Event('change'));
+            });
           }
         });
       });
@@ -147,31 +145,9 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
       this._select2control.results.clear();
     };
 
-    _Select2Ajax.prototype.attached = function attached() {};
-
-    _Select2Ajax.prototype.itemsChanged = function itemsChanged(newValue, oldValue) {
-      var index = newValue.map(function (x) {
-        return x.id;
-      }).indexOf(this.value);
-      if (index === -1) {
-        this.value = null;
-      }
-    };
-
-    _Select2Ajax.prototype.valueChanged = function valueChanged(newValue, oldValue, opts) {
-      if (newValue === undefined) {
-        throw new Error('Do not use undefined!');
-      }
-
-      var newValueNumber = Number(newValue);
-      var newValueInt = parseInt(newValueNumber, 10);
-
-      if (isNaN(newValueInt) || newValueInt !== newValueNumber) {
-        throw new Error('Item Id must be null or an intiger!');
-      }
-
-      if (newValueInt !== Number(oldValue)) {
-        this.select2.select2('val', newValueInt);
+    _Select2Ajax.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.$select.val(newValue).trigger('change');
       }
     };
 

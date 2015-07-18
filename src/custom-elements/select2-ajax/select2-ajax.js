@@ -19,8 +19,8 @@ export class Select2Ajax {
 
   bind() {
     let select2this = this;
-    $.fn.select2.amd.require(['select2/data/array', 'select2/utils'],(ArrayAdapter, Utils) => {
-      function AjaxAdapter ($element, options) {
+    $.fn.select2.amd.require(['select2/data/array', 'select2/utils'], (ArrayAdapter, Utils) => {
+      function AjaxAdapter($element, options) {
         this.ajaxOptions = options.get('ajax') || {};
         if (this.ajaxOptions.delay === undefined) this.ajaxOptions.delay = 250;
         if (this.ajaxOptions.minimumInputLength === undefined) this.ajaxOptions.minimumInputLength = 2;
@@ -56,7 +56,8 @@ export class Select2Ajax {
 
       AjaxAdapter.prototype.query = function (params, callback) {
         let self = this;
-        function request () {
+
+        function request() {
           if (params.term !== undefined && params.term.length > self.ajaxOptions.minimumInputLength) {
 
             let url = self.ajaxOptions.url || self.ajaxOptions.getUrl();
@@ -71,7 +72,7 @@ export class Select2Ajax {
                 return d;
               });
 
-              callback({ results: data });
+              callback({results: data});
             });
           }
         }
@@ -100,25 +101,22 @@ export class Select2Ajax {
       const $select = $(select);
       $select.css('width', '100%');
       this.select2 = $select.select2(options);
+      this.$select = $select;
       this._select2control = $select.data('select2');
       this.oldSelect2Value = undefined;
       var self = this;
 
       this.select2.on('change', (event) => {
-        self.value = parseInt(self.select2.val(), 10);
-        if (isNaN(self.value)) {
-          self.value = null;
+        select2this.value = parseInt(select2this.select2.val(), 10);
+        if (isNaN(select2this.value)) {
+          select2this.value = undefined;
         }
 
-        if (self.oldSelect2Value !== self.value) {
-          self.oldSelect2Value = self.value;
-          if (self.initElement === false) {
-            setTimeout(function () {
-              self.element.dispatchEvent(new Event('change'));
-            });
-          } else {
-            self.initElement = false;
-          }
+        if (select2this.oldSelect2Value !== select2this.value) {
+          select2this.oldSelect2Value = select2this.value;
+          setTimeout(function () {
+            select2this.element.dispatchEvent(new Event('change'));
+          });
         }
       });
     });
@@ -128,31 +126,9 @@ export class Select2Ajax {
     this._select2control.results.clear();
   }
 
-  attached() {
-    //this.valueChanged(this.value);
-  }
-
-  itemsChanged(newValue, oldValue) {
-    const index = newValue.map(x => x.id).indexOf(this.value);
-    if (index === -1) {
-      this.value = null;
-    }
-  }
-
-  valueChanged(newValue, oldValue, opts) {
-    if (newValue === undefined) {
-      throw new Error('Do not use undefined!');
-    }
-
-    var newValueNumber = Number(newValue);
-    var newValueInt = parseInt(newValueNumber, 10);
-
-    if (isNaN(newValueInt) || newValueInt !== newValueNumber) {
-      throw new Error('Item Id must be null or an intiger!');
-    }
-
-    if (newValueInt !== Number(oldValue)) {
-      this.select2.select2('val', newValueInt);
+  valueChanged(newValue, oldValue) {
+    if (newValue !== oldValue) {
+      this.$select.val(newValue).trigger('change');
     }
   }
 }

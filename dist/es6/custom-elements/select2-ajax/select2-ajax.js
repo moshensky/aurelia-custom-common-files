@@ -19,7 +19,7 @@ export class Select2Ajax {
 
   bind() {
     let select2this = this;
-    $.fn.select2.amd.require(['select2/data/array', 'select2/utils'], (ArrayAdapter, Utils) => {
+    $.fn.select2.amd.require(['select2/data/array', 'select2/utils', 'select2/selection/single'], (ArrayAdapter, Utils, SingleSelection) => {
       function AjaxAdapter($element, options) {
         this.ajaxOptions = options.get('ajax') || {};
         if (this.ajaxOptions.delay === undefined) this.ajaxOptions.delay = 250;
@@ -89,9 +89,34 @@ export class Select2Ajax {
       };
 
 
+      function CustomSingleSelection($element, options) {
+        CustomSingleSelection.__super__.constructor.apply(this, arguments);
+      }
+
+      Utils.Extend(CustomSingleSelection, SingleSelection);
+
+      CustomSingleSelection.prototype.bind = function (container, $container) {
+        var self = this;
+
+        CustomSingleSelection.__super__.bind.apply(this, arguments);
+
+        this.$selection.on('focus', function (evt) {
+          // User focuses on the container
+          if (!select2this.value) {
+            select2this.$select.select2("open");
+          }
+        });
+
+        this.$selection.on('blur', function (evt) {
+          // User exits the container
+        });
+      };
+
+
       let select = this.element.firstElementChild;
 
       let options = {
+        selectionAdapter: CustomSingleSelection,
         dataAdapter: AjaxAdapter,
         placeholder: this.caption,
         allowClear: true,

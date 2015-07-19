@@ -16,35 +16,65 @@ export class Select2 {
   }
 
   bind() {
-    let select = this.element.firstElementChild;
-
-    let options = Object.assign({
-      placeholder: this.caption,
-      allowClear: true
-    }, this.options);
-
-    const $select = $(select);
-    $select.css('width', '100%');
-    this.select2 = $select.select2(options);
-    this.oldSelect2Value = undefined;
-    var self = this;
-
-    this.select2.on('change', (event) => {
-      self.value = parseInt(self.select2.val(), 10);
-      if (isNaN(self.value)) {
-        self.value = null;
+    let select2this = this;
+    $.fn.select2.amd.require(['select2/utils', 'select2/selection/single'], (Utils, SingleSelection) => {
+      function CustomSingleSelection($element, options) {
+        CustomSingleSelection.__super__.constructor.apply(this, arguments);
       }
 
-      if (self.oldSelect2Value !== self.value) {
-        self.oldSelect2Value = self.value;
-        if (self.initElement === false) {
-          setTimeout(function () {
-            self.element.dispatchEvent(new Event('change'));
-          });
-        } else {
-          self.initElement = false;
+      Utils.Extend(CustomSingleSelection, SingleSelection);
+
+      CustomSingleSelection.prototype.bind = function (container, $container) {
+        var self = this;
+
+        CustomSingleSelection.__super__.bind.apply(this, arguments);
+
+        this.$selection.on('focus', function (evt) {
+          // User focuses on the container
+          if (!select2this.value) {
+            select2this.$select.select2("open");
+          }
+        });
+
+        this.$selection.on('blur', function (evt) {
+          // User exits the container
+        });
+      };
+
+
+      let select = this.element.firstElementChild;
+
+      let options = Object.assign({
+        selectionAdapter: CustomSingleSelection,
+        placeholder: this.caption,
+        allowClear: true
+      }, this.options);
+
+      const $select = $(select);
+      $select.css('width', '100%');
+      this.select2 = $select.select2(options);
+      this.$select = $select;
+      this._select2control = $select.data('select2');
+      this.oldSelect2Value = undefined;
+      var self = this;
+
+      this.select2.on('change', (event) => {
+        select2this.value = parseInt(select2this.select2.val(), 10);
+        if (isNaN(select2this.value)) {
+          select2this.value = undefined;
         }
-      }
+
+        if (select2this.oldSelect2Value !== select2this.value) {
+          select2this.oldSelect2Value = select2this.value;
+          if (select2this.initElement === false) {
+            setTimeout(function () {
+              select2this.element.dispatchEvent(new Event('change'));
+            });
+          } else {
+            select2this.initElement = false;
+          }
+        }
+      });
     });
   }
 
@@ -60,19 +90,8 @@ export class Select2 {
   }
 
   valueChanged(newValue, oldValue, opts) {
-    if (newValue === undefined) {
-      throw new Error('Do not use undefined!');
-    }
-
-    var newValueNumber = Number(newValue);
-    var newValueInt = parseInt(newValueNumber, 10);
-
-    if (isNaN(newValueInt) || newValueInt !== newValueNumber) {
-      throw new Error('Item Id must be null or an intiger!');
-    }
-
-    if (newValueInt !== Number(oldValue)) {
-      this.select2.select2('val', newValueInt);
+    if (newValue !== oldValue) {
+      this.$select.val(newValue).trigger('change');
     }
   }
 }

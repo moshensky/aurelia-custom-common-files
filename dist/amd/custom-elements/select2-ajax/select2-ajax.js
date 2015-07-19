@@ -39,7 +39,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
       var _this = this;
 
       var select2this = this;
-      _$['default'].fn.select2.amd.require(['select2/data/array', 'select2/utils'], function (ArrayAdapter, Utils) {
+      _$['default'].fn.select2.amd.require(['select2/data/array', 'select2/utils', 'select2/selection/single'], function (ArrayAdapter, Utils, SingleSelection) {
         function AjaxAdapter($element, options) {
           this.ajaxOptions = options.get('ajax') || {};
           if (this.ajaxOptions.delay === undefined) this.ajaxOptions.delay = 250;
@@ -108,9 +108,30 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
           }
         };
 
+        function CustomSingleSelection($element, options) {
+          CustomSingleSelection.__super__.constructor.apply(this, arguments);
+        }
+
+        Utils.Extend(CustomSingleSelection, SingleSelection);
+
+        CustomSingleSelection.prototype.bind = function (container, $container) {
+          var self = this;
+
+          CustomSingleSelection.__super__.bind.apply(this, arguments);
+
+          this.$selection.on('focus', function (evt) {
+            if (!select2this.value) {
+              select2this.$select.select2('open');
+            }
+          });
+
+          this.$selection.on('blur', function (evt) {});
+        };
+
         var select = _this.element.firstElementChild;
 
         var options = {
+          selectionAdapter: CustomSingleSelection,
           dataAdapter: AjaxAdapter,
           placeholder: _this.caption,
           allowClear: true,

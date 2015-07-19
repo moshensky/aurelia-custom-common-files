@@ -35,35 +35,63 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2'], function (
     var _Select2 = Select2;
 
     _Select2.prototype.bind = function bind() {
-      var select = this.element.firstElementChild;
+      var _this = this;
 
-      var options = Object.assign({
-        placeholder: this.caption,
-        allowClear: true
-      }, this.options);
-
-      var $select = _$['default'](select);
-      $select.css('width', '100%');
-      this.select2 = $select.select2(options);
-      this.oldSelect2Value = undefined;
-      var self = this;
-
-      this.select2.on('change', function (event) {
-        self.value = parseInt(self.select2.val(), 10);
-        if (isNaN(self.value)) {
-          self.value = null;
+      var select2this = this;
+      _$['default'].fn.select2.amd.require(['select2/utils', 'select2/selection/single'], function (Utils, SingleSelection) {
+        function CustomSingleSelection($element, options) {
+          CustomSingleSelection.__super__.constructor.apply(this, arguments);
         }
 
-        if (self.oldSelect2Value !== self.value) {
-          self.oldSelect2Value = self.value;
-          if (self.initElement === false) {
-            setTimeout(function () {
-              self.element.dispatchEvent(new Event('change'));
-            });
-          } else {
-            self.initElement = false;
+        Utils.Extend(CustomSingleSelection, SingleSelection);
+
+        CustomSingleSelection.prototype.bind = function (container, $container) {
+          var self = this;
+
+          CustomSingleSelection.__super__.bind.apply(this, arguments);
+
+          this.$selection.on('focus', function (evt) {
+            if (!select2this.value) {
+              select2this.$select.select2('open');
+            }
+          });
+
+          this.$selection.on('blur', function (evt) {});
+        };
+
+        var select = _this.element.firstElementChild;
+
+        var options = Object.assign({
+          selectionAdapter: CustomSingleSelection,
+          placeholder: _this.caption,
+          allowClear: true
+        }, _this.options);
+
+        var $select = _$['default'](select);
+        $select.css('width', '100%');
+        _this.select2 = $select.select2(options);
+        _this.$select = $select;
+        _this._select2control = $select.data('select2');
+        _this.oldSelect2Value = undefined;
+        var self = _this;
+
+        _this.select2.on('change', function (event) {
+          select2this.value = parseInt(select2this.select2.val(), 10);
+          if (isNaN(select2this.value)) {
+            select2this.value = undefined;
           }
-        }
+
+          if (select2this.oldSelect2Value !== select2this.value) {
+            select2this.oldSelect2Value = select2this.value;
+            if (select2this.initElement === false) {
+              setTimeout(function () {
+                select2this.element.dispatchEvent(new Event('change'));
+              });
+            } else {
+              select2this.initElement = false;
+            }
+          }
+        });
       });
     };
 
@@ -81,19 +109,8 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2'], function (
     };
 
     _Select2.prototype.valueChanged = function valueChanged(newValue, oldValue, opts) {
-      if (newValue === undefined) {
-        throw new Error('Do not use undefined!');
-      }
-
-      var newValueNumber = Number(newValue);
-      var newValueInt = parseInt(newValueNumber, 10);
-
-      if (isNaN(newValueInt) || newValueInt !== newValueNumber) {
-        throw new Error('Item Id must be null or an intiger!');
-      }
-
-      if (newValueInt !== Number(oldValue)) {
-        this.select2.select2('val', newValueInt);
+      if (newValue !== oldValue) {
+        this.$select.val(newValue).trigger('change');
       }
     };
 

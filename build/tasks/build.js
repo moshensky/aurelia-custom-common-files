@@ -5,6 +5,7 @@ var paths = require('../paths');
 var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
 var jade = require('gulp-jade');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('build-html-es6', function () {
   return gulp.src(paths.html)
@@ -43,9 +44,12 @@ gulp.task('build-html-system', function () {
     .pipe(gulp.dest(paths.output + 'system'));
 });
 
+// TODO: generate maps conditionaly based on config!
 gulp.task('build-system', ['build-html-system'], function () {
   return gulp.src(paths.source)
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(to5(assign({}, compilerOptions, {modules:'system'})))
+    .pipe(sourcemaps.write({includeContent: true}))
     .pipe(gulp.dest(paths.output + 'system'));
 });
 

@@ -89,8 +89,9 @@ export class Select2 {
     }
   }
 
-  valueChanged(newValue, oldValue, opts) {
-    if (newValue !== oldValue) {
+  valueChanged(newValue, oldValue) {
+    // explicitly != and not !==
+    if (newValue != oldValue) {
       this.$select.val(newValue).trigger('change');
     }
   }

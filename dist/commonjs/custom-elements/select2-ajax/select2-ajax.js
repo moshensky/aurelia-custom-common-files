@@ -174,7 +174,7 @@ var Select2Ajax = (function () {
   };
 
   _Select2Ajax.prototype.valueChanged = function valueChanged(newValue, oldValue) {
-    if (newValue !== oldValue) {
+    if (newValue != oldValue) {
       this.$select.val(newValue).trigger('change');
     }
   };

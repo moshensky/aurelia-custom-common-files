@@ -152,7 +152,8 @@ export class Select2Ajax {
   }
 
   valueChanged(newValue, oldValue) {
-    if (newValue !== oldValue) {
+    // explicitly != and not !==
+    if (newValue != oldValue) {
       this.$select.val(newValue).trigger('change');
     }
   }

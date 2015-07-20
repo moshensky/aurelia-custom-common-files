@@ -108,8 +108,8 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2'], function (
       }
     };
 
-    _Select2.prototype.valueChanged = function valueChanged(newValue, oldValue, opts) {
-      if (newValue !== oldValue) {
+    _Select2.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+      if (newValue != oldValue) {
         this.$select.val(newValue).trigger('change');
       }
     };

@@ -97,11 +97,9 @@ var Select2 = (function () {
           }
         }
       });
-    });
-  };
 
-  _Select2.prototype.attached = function attached() {
-    this.valueChanged(this.value);
+      select2this.valueChanged(_this.value);
+    });
   };
 
   _Select2.prototype.itemsChanged = function itemsChanged(newValue, oldValue) {

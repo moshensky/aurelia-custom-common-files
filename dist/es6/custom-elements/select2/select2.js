@@ -75,11 +75,9 @@ export class Select2 {
           }
         }
       });
-    });
-  }
 
-  attached() {
-    this.valueChanged(this.value);
+      select2this.valueChanged(this.value);
+    });
   }
 
   itemsChanged(newValue, oldValue) {

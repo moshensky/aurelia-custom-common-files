@@ -17,9 +17,9 @@ var DateFormatValueConverter = (function () {
 
   DateFormatValueConverter.prototype.toView = function toView(value, format) {
     if (format) {
-      return _moment2['default'](value).format(format);
+      return (0, _moment2['default'])(value).format(format);
     }
-    return _moment2['default'](value).format('LL');
+    return (0, _moment2['default'])(value).format('LL');
   };
 
   return DateFormatValueConverter;

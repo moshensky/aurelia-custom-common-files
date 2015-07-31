@@ -72,7 +72,7 @@ var Select2 = (function () {
         allowClear: true
       }, _this.options);
 
-      var $select = _jquery2['default'](select);
+      var $select = (0, _jquery2['default'])(select);
       $select.css('width', '100%');
       _this.select2 = $select.select2(options);
       _this.$select = $select;
@@ -120,42 +120,42 @@ var Select2 = (function () {
   _createDecoratedClass(_Select2, [{
     key: 'items',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return null;
     },
     enumerable: true
   }, {
     key: 'caption',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return null;
     },
     enumerable: true
   }, {
     key: 'value',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return null;
     },
     enumerable: true
   }, {
     key: 'disabled',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return false;
     },
     enumerable: true
   }, {
     key: 'options',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return {};
     },
     enumerable: true
   }], null, _instanceInitializers);
 
-  Select2 = _aureliaFramework.inject(Element)(Select2) || Select2;
-  Select2 = _aureliaFramework.customElement('select-two')(Select2) || Select2;
+  Select2 = (0, _aureliaFramework.inject)(Element)(Select2) || Select2;
+  Select2 = (0, _aureliaFramework.customElement)('select-two')(Select2) || Select2;
   return Select2;
 })();
 

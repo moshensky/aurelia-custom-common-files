@@ -5,6 +5,7 @@ var paths = require('../paths');
 var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
 var jade = require('gulp-jade');
+var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('build-html-es6', function () {
@@ -39,13 +40,18 @@ gulp.task('build-amd', ['build-html-amd'], function () {
     .pipe(gulp.dest(paths.output + 'amd'));
 });
 
+gulp.task('build-css-system', function () {
+  return gulp.src(paths.css)
+    .pipe(gulp.dest(paths.output + 'system'));
+});
+
 gulp.task('build-html-system', function () {
   return gulp.src(paths.html)
     .pipe(gulp.dest(paths.output + 'system'));
 });
 
 // TODO: generate maps conditionaly based on config!
-gulp.task('build-system', ['build-html-system'], function () {
+gulp.task('build-js-system', function () {
   return gulp.src(paths.source)
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(to5(assign({}, compilerOptions, {modules:'system'})))
@@ -53,7 +59,10 @@ gulp.task('build-system', ['build-html-system'], function () {
     .pipe(gulp.dest(paths.output + 'system'));
 });
 
-gulp.task('jade', function () {
+gulp.task('build-system', ['build-html-system', 'build-css-system', 'build-js-system']);
+
+
+gulp.task('compile-jade', function () {
   return gulp.src(paths.jade)
     .pipe(jade({
       pretty: true
@@ -61,10 +70,18 @@ gulp.task('jade', function () {
     .pipe(gulp.dest('src/.'));
 });
 
+gulp.task('compile-less', function () {
+  return gulp.src(paths.less)
+    .pipe(less())
+    .pipe(gulp.dest('src/.'));
+});
+
+
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    'jade',
+    'compile-jade',
+    'compile-less',
     ['build-es6', 'build-commonjs', 'build-amd', 'build-system'],
     callback
   );

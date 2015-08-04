@@ -5,17 +5,17 @@ define(['exports', 'aurelia-validation/validation/validate-custom-attribute-view
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+  function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
   var TableValidationViewStrategy = (function (_ValidateCustomAttributeViewStrategyBase) {
+    _inherits(TableValidationViewStrategy, _ValidateCustomAttributeViewStrategyBase);
+
     function TableValidationViewStrategy() {
       _classCallCheck(this, TableValidationViewStrategy);
 
       _ValidateCustomAttributeViewStrategyBase.call(this);
       this.helpBlockClass = 'aurelia-validation-message';
     }
-
-    _inherits(TableValidationViewStrategy, _ValidateCustomAttributeViewStrategyBase);
 
     TableValidationViewStrategy.prototype.searchFormGroup = function searchFormGroup(currentElement, currentDepth) {
       if (currentDepth === 5) {
@@ -38,7 +38,7 @@ define(['exports', 'aurelia-validation/validation/validate-custom-attribute-view
       }
 
       if (!helpBlock) {
-        helpBlock = document.createElement('p');
+        helpBlock = document.createElement("p");
         helpBlock.classList.add('help-block');
         helpBlock.classList.add(this.helpBlockClass);
 

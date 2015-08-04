@@ -12,9 +12,7 @@ define(['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
       this.element = element;
     }
 
-    var _Enable = Enable;
-
-    _Enable.prototype.valueChanged = function valueChanged(newValue) {
+    Enable.prototype.valueChanged = function valueChanged(newValue) {
       if (newValue) {
         this.element.disabled = '';
       } else {
@@ -22,8 +20,9 @@ define(['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
       }
     };
 
-    Enable = (0, _aureliaFramework.inject)(Element)(Enable) || Enable;
-    Enable = (0, _aureliaFramework.customAttribute)('enable')(Enable) || Enable;
+    var _Enable = Enable;
+    Enable = _aureliaFramework.inject(Element)(Enable) || Enable;
+    Enable = _aureliaFramework.customAttribute('enable')(Enable) || Enable;
     return Enable;
   })();
 

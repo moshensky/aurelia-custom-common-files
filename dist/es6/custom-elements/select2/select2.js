@@ -93,4 +93,12 @@ export class Select2 {
       this.$select.val(newValue).trigger('change');
     }
   }
+
+  attached() {
+    if (this.value === undefined) {
+      this.valueChanged(this.value)
+    } else {
+      this.initElement = false;
+    }
+  }
 }

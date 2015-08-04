@@ -16,9 +16,9 @@ define(['exports', 'moment'], function (exports, _moment) {
 
     DateFormatValueConverter.prototype.toView = function toView(value, format) {
       if (format) {
-        return (0, _moment2['default'])(value).format(format);
+        return _moment2['default'](value).format(format);
       }
-      return (0, _moment2['default'])(value).format('LL');
+      return _moment2['default'](value).format('LL');
     };
 
     return DateFormatValueConverter;

@@ -9,12 +9,49 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-  function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer.call(target); Object.defineProperty(target, key, descriptor); }
+  function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer ? descriptor.initializer.call(target) : undefined; Object.defineProperty(target, key, descriptor); }
 
   var _$ = _interopRequireDefault(_jquery);
 
   var Select2Ajax = (function () {
     var _instanceInitializers = {};
+
+    _createDecoratedClass(Select2Ajax, [{
+      key: 'caption',
+      decorators: [_aureliaFramework.bindable],
+      initializer: function initializer() {
+        return null;
+      },
+      enumerable: true
+    }, {
+      key: 'value',
+      decorators: [_aureliaFramework.bindable],
+      initializer: function initializer() {
+        return null;
+      },
+      enumerable: true
+    }, {
+      key: 'disabled',
+      decorators: [_aureliaFramework.bindable],
+      initializer: function initializer() {
+        return false;
+      },
+      enumerable: true
+    }, {
+      key: 'options',
+      decorators: [_aureliaFramework.bindable],
+      initializer: function initializer() {
+        return {};
+      },
+      enumerable: true
+    }, {
+      key: 'clear',
+      decorators: [_aureliaFramework.bindable],
+      initializer: function initializer() {
+        return {};
+      },
+      enumerable: true
+    }], null, _instanceInitializers);
 
     function Select2Ajax(element, http) {
       _classCallCheck(this, _Select2Ajax);
@@ -33,9 +70,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
       this.http = http;
     }
 
-    var _Select2Ajax = Select2Ajax;
-
-    _Select2Ajax.prototype.bind = function bind() {
+    Select2Ajax.prototype.bind = function bind() {
       var _this = this;
 
       var select2this = this;
@@ -63,7 +98,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
             var self = this;
 
             this.$element.find(':selected').each(function () {
-              var $option = (0, _$['default'])(this);
+              var $option = _$['default'](this);
 
               var option = self.item($option);
 
@@ -82,10 +117,10 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
 
               var url = self.ajaxOptions.url || self.ajaxOptions.getUrl();
               if (url === undefined) {
-                throw new Error('Configuration exception! select2-ajax, must have defined options.ajax.url or options.ajax.getUrl()!');
+                throw new Error("Configuration exception! select2-ajax, must have defined options.ajax.url or options.ajax.getUrl()!");
               }
 
-              var req = select2this.http.get('' + url + '?q=' + params.term);
+              var req = select2this.http.get(url + '?q=' + params.term);
               req.then(function (data) {
                 data = data.map(function (d) {
                   d.text = d.name;
@@ -121,7 +156,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
 
           this.$selection.on('focus', function (evt) {
             if (!select2this.value) {
-              select2this.$select.select2('open');
+              select2this.$select.select2("open");
             }
           });
 
@@ -138,7 +173,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
           ajax: _this.options
         };
 
-        var $select = (0, _$['default'])(select);
+        var $select = _$['default'](select);
         $select.css('width', '100%');
         _this.select2 = $select.select2(options);
         _this.$select = $select;
@@ -162,55 +197,19 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2', 'service'],
       });
     };
 
-    _Select2Ajax.prototype.clearChanged = function clearChanged() {
+    Select2Ajax.prototype.clearChanged = function clearChanged() {
       this._select2control.results.clear();
     };
 
-    _Select2Ajax.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+    Select2Ajax.prototype.valueChanged = function valueChanged(newValue, oldValue) {
       if (newValue != oldValue) {
         this.$select.val(newValue).trigger('change');
       }
     };
 
-    _createDecoratedClass(_Select2Ajax, [{
-      key: 'caption',
-      decorators: [_aureliaFramework.bindable],
-      initializer: function () {
-        return null;
-      },
-      enumerable: true
-    }, {
-      key: 'value',
-      decorators: [_aureliaFramework.bindable],
-      initializer: function () {
-        return null;
-      },
-      enumerable: true
-    }, {
-      key: 'disabled',
-      decorators: [_aureliaFramework.bindable],
-      initializer: function () {
-        return false;
-      },
-      enumerable: true
-    }, {
-      key: 'options',
-      decorators: [_aureliaFramework.bindable],
-      initializer: function () {
-        return {};
-      },
-      enumerable: true
-    }, {
-      key: 'clear',
-      decorators: [_aureliaFramework.bindable],
-      initializer: function () {
-        return {};
-      },
-      enumerable: true
-    }], null, _instanceInitializers);
-
-    Select2Ajax = (0, _aureliaFramework.inject)(Element, _service.Http)(Select2Ajax) || Select2Ajax;
-    Select2Ajax = (0, _aureliaFramework.customElement)('select-two-ajax')(Select2Ajax) || Select2Ajax;
+    var _Select2Ajax = Select2Ajax;
+    Select2Ajax = _aureliaFramework.inject(Element, _service.Http)(Select2Ajax) || Select2Ajax;
+    Select2Ajax = _aureliaFramework.customElement('select-two-ajax')(Select2Ajax) || Select2Ajax;
     return Select2Ajax;
   })();
 

@@ -118,7 +118,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2'], function (
 
           if (select2this.oldSelect2Value !== select2this.value) {
             select2this.oldSelect2Value = select2this.value;
-            if (select2this.initElement === false) {
+            if (select2this.initElement === undefined || select2this.initElement === false) {
               setTimeout(function () {
                 select2this.element.dispatchEvent(new Event('change'));
               });
@@ -144,14 +144,6 @@ define(['exports', 'aurelia-framework', 'jquery', 'select2/select2'], function (
     Select2.prototype.valueChanged = function valueChanged(newValue, oldValue) {
       if (newValue != oldValue) {
         this.$select.val(newValue).trigger('change');
-      }
-    };
-
-    Select2.prototype.attached = function attached() {
-      if (this.value === undefined) {
-        this.valueChanged(this.value);
-      } else {
-        this.initElement = false;
       }
     };
 

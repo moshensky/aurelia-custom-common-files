@@ -66,7 +66,7 @@ export class Select2 {
 
         if (select2this.oldSelect2Value !== select2this.value) {
           select2this.oldSelect2Value = select2this.value;
-          if (select2this.initElement === false) {
+          if (select2this.initElement === undefined || select2this.initElement === false) {
             setTimeout(function () {
               select2this.element.dispatchEvent(new Event('change'));
             });
@@ -91,14 +91,6 @@ export class Select2 {
     // explicitly != and not !==
     if (newValue != oldValue) {
       this.$select.val(newValue).trigger('change');
-    }
-  }
-
-  attached() {
-    if (this.value === undefined) {
-      this.valueChanged(this.value)
-    } else {
-      this.initElement = false;
     }
   }
 }

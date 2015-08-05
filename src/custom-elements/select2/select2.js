@@ -66,7 +66,7 @@ export class Select2 {
 
         if (select2this.oldSelect2Value !== select2this.value) {
           select2this.oldSelect2Value = select2this.value;
-          if (select2this.initElement === false) {
+          if (select2this.initElement === undefined || select2this.initElement === false) {
             setTimeout(function () {
               select2this.element.dispatchEvent(new Event('change'));
             });

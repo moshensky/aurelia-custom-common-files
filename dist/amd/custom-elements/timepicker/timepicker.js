@@ -9,7 +9,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-    function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer.call(target); Object.defineProperty(target, key, descriptor); }
+    function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer ? descriptor.initializer.call(target) : undefined; Object.defineProperty(target, key, descriptor); }
 
     var _$ = _interopRequireDefault(_jquery);
 
@@ -17,6 +17,22 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
 
     var Timepicker = (function () {
         var _instanceInitializers = {};
+
+        _createDecoratedClass(Timepicker, [{
+            key: 'value',
+            decorators: [_aureliaFramework.bindable],
+            initializer: function initializer() {
+                return null;
+            },
+            enumerable: true
+        }, {
+            key: 'options',
+            decorators: [_aureliaFramework.bindable],
+            initializer: function initializer() {
+                return null;
+            },
+            enumerable: true
+        }], null, _instanceInitializers);
 
         function Timepicker(element) {
             _classCallCheck(this, _Timepicker);
@@ -28,9 +44,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             this.element = element;
         }
 
-        var _Timepicker = Timepicker;
-
-        _Timepicker.prototype.bind = function bind() {
+        Timepicker.prototype.bind = function bind() {
             var _this = this;
 
             var defaultOpts = {
@@ -39,7 +53,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
 
             var div = this.element.firstElementChild;
             var input = div.firstElementChild;
-            this.$element = (0, _$['default'])(div);
+            this.$element = _$['default'](div);
             this.options = this.options || {};
             if (this.options.format !== undefined) {
                 delete this.options.format;
@@ -63,7 +77,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             this.valueChanged(this.value);
         };
 
-        _Timepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+        Timepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
             if (newValue === undefined) throw new Error('Do not use undefined!');
             if (newValue === null) {
                 this.$element.val('');
@@ -71,7 +85,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
                 return;
             }
 
-            if (newValue.constructor.name !== 'Timespan') {
+            if (newValue.constructor.name !== "Timespan") {
                 throw new Error('This has to be moment type.');
             }
 
@@ -80,28 +94,13 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
                 return;
             }
 
-            var timeAsMoment = (0, _moment2['default'])(newValue.toString(), 'HH:mm');
+            var timeAsMoment = _moment2['default'](newValue.toString(), 'HH:mm');
             this.$element.data('DateTimePicker').date(timeAsMoment);
         };
 
-        _createDecoratedClass(_Timepicker, [{
-            key: 'value',
-            decorators: [_aureliaFramework.bindable],
-            initializer: function () {
-                return null;
-            },
-            enumerable: true
-        }, {
-            key: 'options',
-            decorators: [_aureliaFramework.bindable],
-            initializer: function () {
-                return null;
-            },
-            enumerable: true
-        }], null, _instanceInitializers);
-
-        Timepicker = (0, _aureliaFramework.inject)(Element)(Timepicker) || Timepicker;
-        Timepicker = (0, _aureliaFramework.customElement)('timepicker')(Timepicker) || Timepicker;
+        var _Timepicker = Timepicker;
+        Timepicker = _aureliaFramework.inject(Element)(Timepicker) || Timepicker;
+        Timepicker = _aureliaFramework.customElement('timepicker')(Timepicker) || Timepicker;
         return Timepicker;
     })();
 

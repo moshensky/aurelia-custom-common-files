@@ -14,5 +14,5 @@ module.exports = {
   doc:'./doc',
   e2eSpecsSrc: 'test/e2e/src/*.js',
   e2eSpecsDist: 'test/e2e/dist/',
-  pluginPath: '../global-test/src/frontend/jspm_packages/github/moshensky/aurelia-custom-common-files@master'
+  pluginPath: '../global-test/src/frontend/jspm_packages/github/moshensky/aurelia-custom-common-files@0.3.6'
 };

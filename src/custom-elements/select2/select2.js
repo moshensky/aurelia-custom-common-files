@@ -17,7 +17,8 @@ export class Select2 {
 
   bind() {
     let select2this = this;
-    $.fn.select2.amd.require(['select2/utils', 'select2/selection/single'], (Utils, SingleSelection) => {
+    $.fn.select2.amd.require(['select2/utils', 'select2/selection/single', 'select2/selection/allowClear', 'select2/selection/placeholder'],
+      (Utils, SingleSelection, AllowClear, Placeholder) => {
       function CustomSingleSelection($element, options) {
         CustomSingleSelection.__super__.constructor.apply(this, arguments);
       }
@@ -32,7 +33,7 @@ export class Select2 {
         this.$selection.on('focus', function (evt) {
           // User focuses on the container
           if (!select2this.value) {
-            select2this.$select.select2("open");
+            select2this.$select.select2('open');
           }
         });
 
@@ -44,8 +45,11 @@ export class Select2 {
 
       let select = this.element.firstElementChild;
 
+      let CustomSelectionAdapter = Utils.Decorate(CustomSingleSelection, AllowClear);
+      CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Placeholder);
+
       let options = Object.assign({
-        selectionAdapter: CustomSingleSelection,
+        selectionAdapter: CustomSelectionAdapter,
         placeholder: this.caption,
         allowClear: true
       }, this.options);

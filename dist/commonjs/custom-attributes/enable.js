@@ -13,7 +13,9 @@ var Enable = (function () {
     this.element = element;
   }
 
-  Enable.prototype.valueChanged = function valueChanged(newValue) {
+  var _Enable = Enable;
+
+  _Enable.prototype.valueChanged = function valueChanged(newValue) {
     if (newValue) {
       this.element.disabled = '';
     } else {
@@ -21,9 +23,8 @@ var Enable = (function () {
     }
   };
 
-  var _Enable = Enable;
-  Enable = _aureliaFramework.inject(Element)(Enable) || Enable;
-  Enable = _aureliaFramework.customAttribute('enable')(Enable) || Enable;
+  Enable = (0, _aureliaFramework.inject)(Element)(Enable) || Enable;
+  Enable = (0, _aureliaFramework.customAttribute)('enable')(Enable) || Enable;
   return Enable;
 })();
 

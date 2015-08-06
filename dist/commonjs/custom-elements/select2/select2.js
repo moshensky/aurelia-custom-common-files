@@ -8,7 +8,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer ? descriptor.initializer.call(target) : undefined; Object.defineProperty(target, key, descriptor); }
+function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer.call(target); Object.defineProperty(target, key, descriptor); }
 
 var _aureliaFramework = require('aurelia-framework');
 
@@ -20,43 +20,6 @@ require('select2/select2');
 
 var Select2 = (function () {
   var _instanceInitializers = {};
-
-  _createDecoratedClass(Select2, [{
-    key: 'items',
-    decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
-      return null;
-    },
-    enumerable: true
-  }, {
-    key: 'caption',
-    decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
-      return null;
-    },
-    enumerable: true
-  }, {
-    key: 'value',
-    decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
-      return null;
-    },
-    enumerable: true
-  }, {
-    key: 'disabled',
-    decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
-      return false;
-    },
-    enumerable: true
-  }, {
-    key: 'options',
-    decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
-      return {};
-    },
-    enumerable: true
-  }], null, _instanceInitializers);
 
   function Select2(element) {
     _classCallCheck(this, _Select2);
@@ -74,11 +37,13 @@ var Select2 = (function () {
     this.element = element;
   }
 
-  Select2.prototype.bind = function bind() {
+  var _Select2 = Select2;
+
+  _Select2.prototype.bind = function bind() {
     var _this = this;
 
     var select2this = this;
-    _jquery2['default'].fn.select2.amd.require(['select2/utils', 'select2/selection/single'], function (Utils, SingleSelection) {
+    _jquery2['default'].fn.select2.amd.require(['select2/utils', 'select2/selection/single', 'select2/selection/allowClear', 'select2/selection/placeholder'], function (Utils, SingleSelection, AllowClear, Placeholder) {
       function CustomSingleSelection($element, options) {
         CustomSingleSelection.__super__.constructor.apply(this, arguments);
       }
@@ -92,7 +57,7 @@ var Select2 = (function () {
 
         this.$selection.on('focus', function (evt) {
           if (!select2this.value) {
-            select2this.$select.select2("open");
+            select2this.$select.select2('open');
           }
         });
 
@@ -101,13 +66,16 @@ var Select2 = (function () {
 
       var select = _this.element.firstElementChild;
 
+      var CustomSelectionAdapter = Utils.Decorate(CustomSingleSelection, AllowClear);
+      CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Placeholder);
+
       var options = Object.assign({
-        selectionAdapter: CustomSingleSelection,
+        selectionAdapter: CustomSelectionAdapter,
         placeholder: _this.caption,
         allowClear: true
       }, _this.options);
 
-      var $select = _jquery2['default'](select);
+      var $select = (0, _jquery2['default'])(select);
       $select.css('width', '100%');
       _this.select2 = $select.select2(options);
       _this.$select = $select;
@@ -137,7 +105,7 @@ var Select2 = (function () {
     });
   };
 
-  Select2.prototype.itemsChanged = function itemsChanged(newValue, oldValue) {
+  _Select2.prototype.itemsChanged = function itemsChanged(newValue, oldValue) {
     var index = newValue.map(function (x) {
       return x.id;
     }).indexOf(this.value);
@@ -146,15 +114,51 @@ var Select2 = (function () {
     }
   };
 
-  Select2.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+  _Select2.prototype.valueChanged = function valueChanged(newValue, oldValue) {
     if (newValue != oldValue) {
       this.$select.val(newValue).trigger('change');
     }
   };
 
-  var _Select2 = Select2;
-  Select2 = _aureliaFramework.inject(Element)(Select2) || Select2;
-  Select2 = _aureliaFramework.customElement('select-two')(Select2) || Select2;
+  _createDecoratedClass(_Select2, [{
+    key: 'items',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function () {
+      return null;
+    },
+    enumerable: true
+  }, {
+    key: 'caption',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function () {
+      return null;
+    },
+    enumerable: true
+  }, {
+    key: 'value',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function () {
+      return null;
+    },
+    enumerable: true
+  }, {
+    key: 'disabled',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function () {
+      return false;
+    },
+    enumerable: true
+  }, {
+    key: 'options',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function () {
+      return {};
+    },
+    enumerable: true
+  }], null, _instanceInitializers);
+
+  Select2 = (0, _aureliaFramework.inject)(Element)(Select2) || Select2;
+  Select2 = (0, _aureliaFramework.customElement)('select-two')(Select2) || Select2;
   return Select2;
 })();
 

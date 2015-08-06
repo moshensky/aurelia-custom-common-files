@@ -9,7 +9,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-    function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer ? descriptor.initializer.call(target) : undefined; Object.defineProperty(target, key, descriptor); }
+    function _defineDecoratedPropertyDescriptor(target, key, descriptors) { var _descriptor = descriptors[key]; if (!_descriptor) return; var descriptor = {}; for (var _key in _descriptor) descriptor[_key] = _descriptor[_key]; descriptor.value = descriptor.initializer.call(target); Object.defineProperty(target, key, descriptor); }
 
     var _$ = _interopRequireDefault(_jquery);
 
@@ -17,29 +17,6 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
 
     var Datepicker = (function () {
         var _instanceInitializers = {};
-
-        _createDecoratedClass(Datepicker, [{
-            key: 'value',
-            decorators: [_aureliaFramework.bindable],
-            initializer: function initializer() {
-                return null;
-            },
-            enumerable: true
-        }, {
-            key: 'options',
-            decorators: [_aureliaFramework.bindable],
-            initializer: function initializer() {
-                return null;
-            },
-            enumerable: true
-        }, {
-            key: 'disabled',
-            decorators: [_aureliaFramework.bindable],
-            initializer: function initializer() {
-                return false;
-            },
-            enumerable: true
-        }], null, _instanceInitializers);
 
         function Datepicker(element) {
             _classCallCheck(this, _Datepicker);
@@ -53,7 +30,9 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             this.element = element;
         }
 
-        Datepicker.prototype.bind = function bind() {
+        var _Datepicker = Datepicker;
+
+        _Datepicker.prototype.bind = function bind() {
             var _this = this;
 
             var defaultOpts = {
@@ -65,7 +44,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             };
 
             var div = this.element.firstElementChild;
-            this.$element = _$['default'](div);
+            this.$element = (0, _$['default'])(div);
 
             this.options = this.options || {};
             if (this.options.format !== undefined) {
@@ -82,7 +61,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             this.valueChanged(this.value);
         };
 
-        Datepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+        _Datepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
             if (newValue === undefined) {
                 throw new Error('Do not use undefined!');
             }
@@ -93,7 +72,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
                 return;
             }
 
-            if (newValue.constructor.name !== "Moment") {
+            if (newValue.constructor.name !== 'Moment') {
                 throw new Error('This has to be moment type!');
             }
 
@@ -104,9 +83,31 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             this.$element.data('DateTimePicker').date(newValue);
         };
 
-        var _Datepicker = Datepicker;
-        Datepicker = _aureliaFramework.inject(Element)(Datepicker) || Datepicker;
-        Datepicker = _aureliaFramework.customElement('datetimepicker')(Datepicker) || Datepicker;
+        _createDecoratedClass(_Datepicker, [{
+            key: 'value',
+            decorators: [_aureliaFramework.bindable],
+            initializer: function () {
+                return null;
+            },
+            enumerable: true
+        }, {
+            key: 'options',
+            decorators: [_aureliaFramework.bindable],
+            initializer: function () {
+                return null;
+            },
+            enumerable: true
+        }, {
+            key: 'disabled',
+            decorators: [_aureliaFramework.bindable],
+            initializer: function () {
+                return false;
+            },
+            enumerable: true
+        }], null, _instanceInitializers);
+
+        Datepicker = (0, _aureliaFramework.inject)(Element)(Datepicker) || Datepicker;
+        Datepicker = (0, _aureliaFramework.customElement)('datetimepicker')(Datepicker) || Datepicker;
         return Datepicker;
     })();
 

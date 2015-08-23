@@ -23,8 +23,8 @@ var Enable = (function () {
     }
   };
 
-  Enable = (0, _aureliaFramework.inject)(Element)(Enable) || Enable;
-  Enable = (0, _aureliaFramework.customAttribute)('enable')(Enable) || Enable;
+  Enable = _aureliaFramework.inject(Element)(Enable) || Enable;
+  Enable = _aureliaFramework.customAttribute('enable')(Enable) || Enable;
   return Enable;
 })();
 

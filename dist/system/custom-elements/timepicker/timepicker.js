@@ -94,14 +94,14 @@ System.register(['aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepick
                 _createDecoratedClass(_Timepicker, [{
                     key: 'value',
                     decorators: [bindable],
-                    initializer: function () {
+                    initializer: function initializer() {
                         return null;
                     },
                     enumerable: true
                 }, {
                     key: 'options',
                     decorators: [bindable],
-                    initializer: function () {
+                    initializer: function initializer() {
                         return null;
                     },
                     enumerable: true

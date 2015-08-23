@@ -44,7 +44,7 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
             };
 
             var div = this.element.firstElementChild;
-            this.$element = (0, _$['default'])(div);
+            this.$element = _$['default'](div);
 
             this.options = this.options || {};
             if (this.options.format !== undefined) {
@@ -86,28 +86,28 @@ define(['exports', 'aurelia-framework', 'jquery', 'Eonasdan/bootstrap-datetimepi
         _createDecoratedClass(_Datepicker, [{
             key: 'value',
             decorators: [_aureliaFramework.bindable],
-            initializer: function () {
+            initializer: function initializer() {
                 return null;
             },
             enumerable: true
         }, {
             key: 'options',
             decorators: [_aureliaFramework.bindable],
-            initializer: function () {
+            initializer: function initializer() {
                 return null;
             },
             enumerable: true
         }, {
             key: 'disabled',
             decorators: [_aureliaFramework.bindable],
-            initializer: function () {
+            initializer: function initializer() {
                 return false;
             },
             enumerable: true
         }], null, _instanceInitializers);
 
-        Datepicker = (0, _aureliaFramework.inject)(Element)(Datepicker) || Datepicker;
-        Datepicker = (0, _aureliaFramework.customElement)('datetimepicker')(Datepicker) || Datepicker;
+        Datepicker = _aureliaFramework.inject(Element)(Datepicker) || Datepicker;
+        Datepicker = _aureliaFramework.customElement('datetimepicker')(Datepicker) || Datepicker;
         return Datepicker;
     })();
 

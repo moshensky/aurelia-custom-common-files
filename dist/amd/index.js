@@ -15,9 +15,7 @@ define(['exports', './config', './utils/table-validation-view-strategy', './util
     aurelia.globalResources('./custom-elements/datetimepicker/datetimepicker');
     aurelia.globalResources('./custom-elements/select2/select2');
     aurelia.globalResources('./custom-elements/select2-ajax/select2-ajax');
-
     aurelia.globalResources('./custom-attributes/enable');
-
     aurelia.globalResources('./value-converters/date-format');
 
     if (configCallback !== undefined && typeof configCallback === 'function') {

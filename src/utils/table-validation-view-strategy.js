@@ -6,8 +6,7 @@
 import {ValidateCustomAttributeViewStrategyBase} from 'aurelia-validation/validation/validate-custom-attribute-view-strategy';
 
 export class TableValidationViewStrategy extends ValidateCustomAttributeViewStrategyBase {
-  constructor()
-  {
+  constructor() {
     super();
     this.helpBlockClass = 'aurelia-validation-message';
   }
@@ -79,10 +78,12 @@ export class TableValidationViewStrategy extends ValidateCustomAttributeViewStra
       this.appendMessageToElement(currentElement, validationProperty);
     }
   }
-  prepareElement(validationProperty, element){
+
+  prepareElement(validationProperty, element) {
     this.appendUIVisuals(null, element);
   }
-  updateElement(validationProperty, element){
+
+  updateElement(validationProperty, element) {
     this.appendUIVisuals(validationProperty, element);
   }
 }

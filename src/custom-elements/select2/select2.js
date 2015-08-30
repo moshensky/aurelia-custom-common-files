@@ -22,69 +22,69 @@ export class Select2 {
     let select2this = this;
     $.fn.select2.amd.require(['select2/utils', 'select2/selection/single', 'select2/selection/allowClear', 'select2/selection/placeholder'],
       (Utils, SingleSelection, AllowClear, Placeholder) => {
-      function CustomSingleSelection($element, options) {
-        CustomSingleSelection.__super__.constructor.apply(this, arguments);
-      }
+        function CustomSingleSelection($element, options) {
+          CustomSingleSelection.__super__.constructor.apply(this, arguments);
+        }
 
-      Utils.Extend(CustomSingleSelection, SingleSelection);
+        Utils.Extend(CustomSingleSelection, SingleSelection);
 
-      CustomSingleSelection.prototype.bind = function (container, $container) {
+        CustomSingleSelection.prototype.bind = function (container, $container) {
+          var self = this;
+
+          CustomSingleSelection.__super__.bind.apply(this, arguments);
+
+          this.$selection.on('focus', function (evt) {
+            // User focuses on the container
+            if (!select2this.value) {
+              select2this.$select.select2('open');
+            }
+          });
+
+          this.$selection.on('blur', function (evt) {
+            // User exits the container
+          });
+        };
+
+
+        let select = this.element.firstElementChild;
+
+        let CustomSelectionAdapter = Utils.Decorate(CustomSingleSelection, AllowClear);
+        CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Placeholder);
+
+        let options = Object.assign({
+          selectionAdapter: CustomSelectionAdapter,
+          placeholder: this.caption,
+          allowClear: true
+        }, this.options);
+
+        const $select = $(select);
+        $select.css('width', '100%');
+        this.select2 = $select.select2(options);
+        this.$select = $select;
+        this._select2control = $select.data('select2');
+        this.oldSelect2Value = undefined;
         var self = this;
 
-        CustomSingleSelection.__super__.bind.apply(this, arguments);
+        this.select2.on('change', (event) => {
+          select2this.value = parseInt(select2this.select2.val(), 10);
+          if (isNaN(select2this.value)) {
+            select2this.value = undefined;
+          }
 
-        this.$selection.on('focus', function (evt) {
-          // User focuses on the container
-          if (!select2this.value) {
-            select2this.$select.select2('open');
+          if (select2this.oldSelect2Value !== select2this.value) {
+            select2this.oldSelect2Value = select2this.value;
+            if (select2this.initElement === undefined || select2this.initElement === false) {
+              setTimeout(function () {
+                select2this.element.dispatchEvent(new Event('change'));
+              });
+            } else {
+              select2this.initElement = false;
+            }
           }
         });
 
-        this.$selection.on('blur', function (evt) {
-          // User exits the container
-        });
-      };
-
-
-      let select = this.element.firstElementChild;
-
-      let CustomSelectionAdapter = Utils.Decorate(CustomSingleSelection, AllowClear);
-      CustomSelectionAdapter = Utils.Decorate(CustomSelectionAdapter, Placeholder);
-
-      let options = Object.assign({
-        selectionAdapter: CustomSelectionAdapter,
-        placeholder: this.caption,
-        allowClear: true
-      }, this.options);
-
-      const $select = $(select);
-      $select.css('width', '100%');
-      this.select2 = $select.select2(options);
-      this.$select = $select;
-      this._select2control = $select.data('select2');
-      this.oldSelect2Value = undefined;
-      var self = this;
-
-      this.select2.on('change', (event) => {
-        select2this.value = parseInt(select2this.select2.val(), 10);
-        if (isNaN(select2this.value)) {
-          select2this.value = undefined;
-        }
-
-        if (select2this.oldSelect2Value !== select2this.value) {
-          select2this.oldSelect2Value = select2this.value;
-          if (select2this.initElement === undefined || select2this.initElement === false) {
-            setTimeout(function () {
-              select2this.element.dispatchEvent(new Event('change'));
-            });
-          } else {
-            select2this.initElement = false;
-          }
-        }
+        select2this.valueChanged(this.value);
       });
-
-      select2this.valueChanged(this.value);
-    });
   }
 
   itemsChanged(newValue, oldValue) {

@@ -5,61 +5,57 @@ exports.__esModule = true;
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var Timespan = (function () {
-    function Timespan(timespan) {
-        _classCallCheck(this, Timespan);
+  function Timespan(timespan) {
+    _classCallCheck(this, Timespan);
 
-        var hours = 0;
-        var minutes = 0;
-        if (typeof timespan === 'string') {
-            var fragments = timespan.split(':');
-            if (fragments.length >= 2) {
-                hours = parseInt(fragments[0], 10);
-                minutes = parseInt(fragments[1], 10);
+    var hours = 0;
+    var minutes = 0;
+    if (typeof timespan === 'string') {
+      var fragments = timespan.split(':');
+      if (fragments.length >= 2) {
+        hours = parseInt(fragments[0], 10);
+        minutes = parseInt(fragments[1], 10);
 
-                if (hours < 0 || hours > 23) {
-                    hours = 0;
-                }
-
-                if (minutes < 0 || minutes > 59) {
-                    minutes = 0;
-                }
-            }
+        if (hours < 0 || hours > 23) {
+          hours = 0;
         }
 
-        this.hours = hours;
-        this.minutes = minutes;
+        if (minutes < 0 || minutes > 59) {
+          minutes = 0;
+        }
+      }
     }
 
-    Timespan.prototype.toString = function toString() {
-        var result = '';
-        if (this.hours < 10) {
-            result += '0';
-        }
+    this.hours = hours;
+    this.minutes = minutes;
+  }
 
-        result += this.hours + ':';
+  Timespan.prototype.toString = function toString() {
+    var result = '';
+    if (this.hours < 10) {
+      result += '0';
+    }
 
-        if (this.minutes < 10) {
-            result += '0';
-        }
+    result += this.hours + ':';
 
-        result += this.minutes;
+    if (this.minutes < 10) {
+      result += '0';
+    }
 
-        return result;
-    };
+    result += this.minutes;
 
-    Timespan.prototype.equals = function equals(other) {
-        if (other === undefined || other === null) {
-            return false;
-        }
+    return result;
+  };
 
-        if (this.hours !== other.hours || this.minutes !== other.minutes) {
-            return false;
-        }
+  Timespan.prototype.equals = function equals(other) {
+    if (other === undefined || other === null) {
+      return false;
+    }
 
-        return true;
-    };
+    return this.hours === other.hours && this.minutes === other.minutes;
+  };
 
-    return Timespan;
+  return Timespan;
 })();
 
 exports.Timespan = Timespan;

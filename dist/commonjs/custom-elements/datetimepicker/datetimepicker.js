@@ -25,99 +25,99 @@ var _moment = require('moment');
 var _moment2 = _interopRequireDefault(_moment);
 
 var Datepicker = (function () {
-    var _instanceInitializers = {};
+  var _instanceInitializers = {};
 
-    function Datepicker(element) {
-        _classCallCheck(this, _Datepicker);
+  function Datepicker(element) {
+    _classCallCheck(this, _Datepicker);
 
-        _defineDecoratedPropertyDescriptor(this, 'value', _instanceInitializers);
+    _defineDecoratedPropertyDescriptor(this, 'value', _instanceInitializers);
 
-        _defineDecoratedPropertyDescriptor(this, 'options', _instanceInitializers);
+    _defineDecoratedPropertyDescriptor(this, 'options', _instanceInitializers);
 
-        _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
+    _defineDecoratedPropertyDescriptor(this, 'disabled', _instanceInitializers);
 
-        this.element = element;
+    this.element = element;
+  }
+
+  var _Datepicker = Datepicker;
+
+  _Datepicker.prototype.bind = function bind() {
+    var _this = this;
+
+    var defaultOpts = {
+      collapse: false,
+      useCurrent: false,
+      calendarWeeks: true,
+      locale: _moment2['default'].locale(),
+      sideBySide: true
+    };
+
+    var div = this.element.firstElementChild;
+    this.$element = _jquery2['default'](div);
+
+    this.options = this.options || {};
+    if (this.options.format !== undefined) {
+      delete this.options.format;
+    }
+    this.options = _jquery2['default'].extend({}, defaultOpts, this.options);
+
+    this.datepicker = this.$element.datetimepicker(this.options);
+
+    this.datepicker.on('dp.change', function (event) {
+      _this.value = event.date;
+    });
+
+    this.valueChanged(this.value);
+  };
+
+  _Datepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+    if (newValue === undefined) {
+      throw new Error('Do not use undefined!');
     }
 
-    var _Datepicker = Datepicker;
+    if (newValue === null) {
+      var input = this.element.firstElementChild.firstElementChild;
+      input.value = '';
+      return;
+    }
 
-    _Datepicker.prototype.bind = function bind() {
-        var _this = this;
+    if (newValue.isValid() !== true) {
+      throw new Error('This has to be moment type!');
+    }
 
-        var defaultOpts = {
-            collapse: false,
-            useCurrent: false,
-            calendarWeeks: true,
-            locale: _moment2['default'].locale(),
-            sideBySide: true
-        };
+    if (newValue.isSame(oldValue)) {
+      return;
+    }
 
-        var div = this.element.firstElementChild;
-        this.$element = _jquery2['default'](div);
+    this.$element.data('DateTimePicker').date(newValue);
+  };
 
-        this.options = this.options || {};
-        if (this.options.format !== undefined) {
-            delete this.options.format;
-        }
-        this.options = _jquery2['default'].extend({}, defaultOpts, this.options);
+  _createDecoratedClass(_Datepicker, [{
+    key: 'value',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function initializer() {
+      return null;
+    },
+    enumerable: true
+  }, {
+    key: 'options',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function initializer() {
+      return null;
+    },
+    enumerable: true
+  }, {
+    key: 'disabled',
+    decorators: [_aureliaFramework.bindable],
+    initializer: function initializer() {
+      return false;
+    },
+    enumerable: true
+  }], null, _instanceInitializers);
 
-        this.datepicker = this.$element.datetimepicker(this.options);
-
-        this.datepicker.on('dp.change', function (event) {
-            _this.value = event.date;
-        });
-
-        this.valueChanged(this.value);
-    };
-
-    _Datepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
-        if (newValue === undefined) {
-            throw new Error('Do not use undefined!');
-        }
-
-        if (newValue === null) {
-            var input = this.element.firstElementChild.firstElementChild;
-            input.value = '';
-            return;
-        }
-
-        if (newValue.constructor.name !== 'Moment') {
-            throw new Error('This has to be moment type!');
-        }
-
-        if (newValue.isSame(oldValue)) {
-            return;
-        }
-
-        this.$element.data('DateTimePicker').date(newValue);
-    };
-
-    _createDecoratedClass(_Datepicker, [{
-        key: 'value',
-        decorators: [_aureliaFramework.bindable],
-        initializer: function initializer() {
-            return null;
-        },
-        enumerable: true
-    }, {
-        key: 'options',
-        decorators: [_aureliaFramework.bindable],
-        initializer: function initializer() {
-            return null;
-        },
-        enumerable: true
-    }, {
-        key: 'disabled',
-        decorators: [_aureliaFramework.bindable],
-        initializer: function initializer() {
-            return false;
-        },
-        enumerable: true
-    }], null, _instanceInitializers);
-
-    Datepicker = _aureliaFramework.inject(Element)(Datepicker) || Datepicker;
-    Datepicker = _aureliaFramework.customElement('datetimepicker')(Datepicker) || Datepicker;
-    return Datepicker;
+  Datepicker = _aureliaFramework.inject(Element)(Datepicker) || Datepicker;
+  Datepicker = _aureliaFramework.customElement('datetimepicker')(Datepicker) || Datepicker;
+  return Datepicker;
 })();
 
 exports.Datepicker = Datepicker;

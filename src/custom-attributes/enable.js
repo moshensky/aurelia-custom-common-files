@@ -12,9 +12,9 @@ export class Enable {
 
   valueChanged(newValue) {
     if (newValue) {
-      this.element.disabled=''
+      this.element.disabled = ''
     } else {
-      this.element.disabled='disabled'
+      this.element.disabled = 'disabled'
     }
   }
 }

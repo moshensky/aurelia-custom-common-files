@@ -3,7 +3,7 @@
  */
 //import {ValidateCustomAttributeViewStrategy} from 'aurelia-validation';
 // TODO: move to upper import, because it should be fixed in near commit
-import {ValidateCustomAttributeViewStrategyBase} from 'aurelia-validation/validation/validate-custom-attribute-view-strategy';
+import {ValidateCustomAttributeViewStrategyBase} from 'aurelia-validation/validate-custom-attribute-view-strategy';
 
 export class TableValidationViewStrategy extends ValidateCustomAttributeViewStrategyBase {
   constructor() {

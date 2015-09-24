@@ -2,6 +2,8 @@ import {inject, customElement, bindable} from 'aurelia-framework';
 import $ from 'jquery';
 import {Http} from 'service';
 
+import 'select2/select2/css/select2.css!text';
+import '../select2_custom.css!text';
 import 'select2/select2';
 
 @customElement('select-two-ajax')

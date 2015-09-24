@@ -3,9 +3,9 @@
  */
 //import {ValidateCustomAttributeViewStrategy} from 'aurelia-validation';
 // TODO: move to upper import, because it should be fixed in near commit
-import {ValidateCustomAttributeViewStrategyBase} from 'aurelia-validation/validate-custom-attribute-view-strategy';
+import {ValidationViewStrategy} from 'aurelia-validation';///validate-custom-attribute-view-strategy';
 
-export class TableValidationViewStrategy extends ValidateCustomAttributeViewStrategyBase {
+export class TableValidationViewStrategy extends ValidationViewStrategy {
   constructor() {
     super();
     this.helpBlockClass = 'aurelia-validation-message';

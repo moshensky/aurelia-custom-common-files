@@ -16,6 +16,10 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+require('select2/select2/css/select2.css!text');
+
+require('../select2_custom.css!text');
+
 require('select2/select2');
 
 var Select2 = (function () {

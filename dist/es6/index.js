@@ -4,6 +4,7 @@ export {TableValidationViewStrategy} from './utils/table-validation-view-strateg
 export {Timespan} from './utils/timespan'
 export {BaseModel} from './utils/base-model'
 
+
 export function configure(aurelia, configCallback) {
   const config = new Config();
 

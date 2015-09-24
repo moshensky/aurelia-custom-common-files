@@ -1,7 +1,4 @@
 ﻿template
-  require(from="select2/select2/css/select2.css")
-  require(from="../select2_custom.css")
-
   select.form-control(disabled.bind="disabled")
     option
     option(repeat.for="item of items", value.bind="item.id") ${item.name}

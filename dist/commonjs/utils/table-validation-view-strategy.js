@@ -6,17 +6,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-var _aureliaValidationValidationValidateCustomAttributeViewStrategy = require('aurelia-validation/validation/validate-custom-attribute-view-strategy');
+var _aureliaValidation = require('aurelia-validation');
 
-var TableValidationViewStrategy = (function (_ValidateCustomAttributeViewStrategyBase) {
+var TableValidationViewStrategy = (function (_ValidationViewStrategy) {
   function TableValidationViewStrategy() {
     _classCallCheck(this, TableValidationViewStrategy);
 
-    _ValidateCustomAttributeViewStrategyBase.call(this);
+    _ValidationViewStrategy.call(this);
     this.helpBlockClass = 'aurelia-validation-message';
   }
 
-  _inherits(TableValidationViewStrategy, _ValidateCustomAttributeViewStrategyBase);
+  _inherits(TableValidationViewStrategy, _ValidationViewStrategy);
 
   TableValidationViewStrategy.prototype.searchFormGroup = function searchFormGroup(currentElement, currentDepth) {
     if (currentDepth === 5) {
@@ -91,6 +91,6 @@ var TableValidationViewStrategy = (function (_ValidateCustomAttributeViewStrateg
   };
 
   return TableValidationViewStrategy;
-})(_aureliaValidationValidationValidateCustomAttributeViewStrategy.ValidateCustomAttributeViewStrategyBase);
+})(_aureliaValidation.ValidationViewStrategy);
 
 exports.TableValidationViewStrategy = TableValidationViewStrategy;

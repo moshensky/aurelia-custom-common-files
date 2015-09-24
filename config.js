@@ -24,7 +24,7 @@ System.config({
     "core-js": "npm:core-js@0.9.18",
     "jquery": "github:components/jquery@2.1.4",
     "moment": "github:moment/moment@2.10.6",
-    "select2/select2": "github:select2/select2@4.0.0",
+    "select2": "github:select2/select2@4.0.0",
     "github:aurelia/binding@0.9.1": {
       "aurelia-dependency-injection": "github:aurelia/dependency-injection@0.10.1",
       "aurelia-metadata": "github:aurelia/metadata@0.8.0",

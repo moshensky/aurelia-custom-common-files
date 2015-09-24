@@ -1,9 +1,7 @@
 ﻿import {inject, customElement, bindable} from 'aurelia-framework';
 import $ from 'jquery';
 
-import 'select2/select2/css/select2.css!text';
-import '../select2_custom.css!text';
-import 'select2/select2';
+import 'select2';
 
 @customElement('select-two')
 @inject(Element)

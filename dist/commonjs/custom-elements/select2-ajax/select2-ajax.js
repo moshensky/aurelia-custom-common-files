@@ -18,10 +18,6 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _service = require('service');
 
-require('select2/select2/css/select2.css!');
-
-require('../select2_custom.css!');
-
 require('select2/select2');
 
 var Select2Ajax = (function () {

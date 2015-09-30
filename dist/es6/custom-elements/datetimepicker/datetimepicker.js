@@ -36,17 +36,17 @@ export class Datepicker {
 
     this.datepicker.on('dp.change', (event) => {
       this.value = event.date;
+      //Find better way to invoke observable before function!!!
+      setTimeout(function () {
+        self.element.dispatchEvent(new Event("change"));
+      });
     });
 
     this.valueChanged(this.value);
   }
 
   valueChanged(newValue, oldValue) {
-    if (newValue === undefined) {
-      throw new Error('Do not use undefined!');
-    }
-
-    if (newValue === null) {
+    if (newValue === null || newValue === undefined) {
       var input = this.element.firstElementChild.firstElementChild;
       input.value = '';
       return;

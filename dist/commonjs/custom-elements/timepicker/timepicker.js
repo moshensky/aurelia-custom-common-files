@@ -48,7 +48,7 @@ var Timepicker = (function () {
 
     var div = this.element.firstElementChild;
     var input = div.firstElementChild;
-    this.$element = _jquery2['default'](div);
+    this.$element = (0, _jquery2['default'])(div);
     this.options = this.options || {};
     if (this.options.format !== undefined) {
       delete this.options.format;
@@ -59,7 +59,7 @@ var Timepicker = (function () {
     this.datepicker.on('dp.change', function (ev) {
       var elVal = input.value;
       if (elVal === '') {
-        _this.value = null;
+        _this.value = undefined;
       } else {
         var newTimespan = new _utilsTimespan.Timespan(elVal);
         var areSame = newTimespan.equals(_this.value);
@@ -73,10 +73,9 @@ var Timepicker = (function () {
   };
 
   _Timepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
-    if (newValue === undefined) throw new Error('Do not use undefined!');
-    if (newValue === null) {
+    if (newValue === null || newValue === undefined) {
       this.$element.val('');
-      this.value = null;
+      this.value = undefined;
       return;
     }
 
@@ -89,28 +88,28 @@ var Timepicker = (function () {
       return;
     }
 
-    var timeAsMoment = _moment2['default'](newValue.toString(), 'HH:mm');
+    var timeAsMoment = (0, _moment2['default'])(newValue.toString(), 'HH:mm');
     this.$element.data('DateTimePicker').date(timeAsMoment);
   };
 
   _createDecoratedClass(_Timepicker, [{
     key: 'value',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return null;
     },
     enumerable: true
   }, {
     key: 'options',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return null;
     },
     enumerable: true
   }], null, _instanceInitializers);
 
-  Timepicker = _aureliaFramework.inject(Element)(Timepicker) || Timepicker;
-  Timepicker = _aureliaFramework.customElement('timepicker')(Timepicker) || Timepicker;
+  Timepicker = (0, _aureliaFramework.inject)(Element)(Timepicker) || Timepicker;
+  Timepicker = (0, _aureliaFramework.customElement)('timepicker')(Timepicker) || Timepicker;
   return Timepicker;
 })();
 

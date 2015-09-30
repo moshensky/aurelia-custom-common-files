@@ -123,35 +123,35 @@ System.register(['aurelia-framework', 'jquery', 'select2'], function (_export) {
         _createDecoratedClass(_Select2, [{
           key: 'items',
           decorators: [bindable],
-          initializer: function initializer() {
+          initializer: function () {
             return null;
           },
           enumerable: true
         }, {
           key: 'caption',
           decorators: [bindable],
-          initializer: function initializer() {
+          initializer: function () {
             return null;
           },
           enumerable: true
         }, {
           key: 'value',
           decorators: [bindable],
-          initializer: function initializer() {
+          initializer: function () {
             return null;
           },
           enumerable: true
         }, {
           key: 'disabled',
           decorators: [bindable],
-          initializer: function initializer() {
+          initializer: function () {
             return false;
           },
           enumerable: true
         }, {
           key: 'options',
           decorators: [bindable],
-          initializer: function initializer() {
+          initializer: function () {
             return {};
           },
           enumerable: true

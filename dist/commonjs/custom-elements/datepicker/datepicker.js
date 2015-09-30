@@ -51,7 +51,7 @@ var Datepicker = (function () {
     };
 
     var div = this.element.firstElementChild;
-    this.$element = _jquery2['default'](div);
+    this.$element = (0, _jquery2['default'])(div);
 
     this.options = this.options || {};
     if (this.options.format !== undefined) {
@@ -74,11 +74,7 @@ var Datepicker = (function () {
   };
 
   _Datepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
-    if (newValue === undefined) {
-      throw new Error('Do not use undefined!');
-    }
-
-    if (newValue === null) {
+    if (newValue === null || newValue === undefined) {
       var input = this.element.firstElementChild.firstElementChild;
       input.value = '';
       return;
@@ -98,28 +94,28 @@ var Datepicker = (function () {
   _createDecoratedClass(_Datepicker, [{
     key: 'value',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return null;
     },
     enumerable: true
   }, {
     key: 'options',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return null;
     },
     enumerable: true
   }, {
     key: 'disabled',
     decorators: [_aureliaFramework.bindable],
-    initializer: function initializer() {
+    initializer: function () {
       return false;
     },
     enumerable: true
   }], null, _instanceInitializers);
 
-  Datepicker = _aureliaFramework.inject(Element)(Datepicker) || Datepicker;
-  Datepicker = _aureliaFramework.customElement('datepicker')(Datepicker) || Datepicker;
+  Datepicker = (0, _aureliaFramework.inject)(Element)(Datepicker) || Datepicker;
+  Datepicker = (0, _aureliaFramework.customElement)('datepicker')(Datepicker) || Datepicker;
   return Datepicker;
 })();
 

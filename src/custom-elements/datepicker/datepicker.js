@@ -47,11 +47,7 @@ export class Datepicker {
   }
 
   valueChanged(newValue, oldValue) {
-    if (newValue === undefined) {
-      throw new Error('Do not use undefined!');
-    }
-
-    if (newValue === null) {
+    if (newValue === null || newValue === undefined) {
       var input = this.element.firstElementChild.firstElementChild;
       input.value = '';
       return;

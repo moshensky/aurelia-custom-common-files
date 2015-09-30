@@ -33,7 +33,7 @@ export class Timepicker {
     this.datepicker.on('dp.change', (ev) => {
       var elVal = input.value;
       if (elVal === '') {
-        this.value = null;
+        this.value = undefined;
       } else {
         var newTimespan = new Timespan(elVal);
         const areSame = newTimespan.equals(this.value);
@@ -47,10 +47,9 @@ export class Timepicker {
   }
 
   valueChanged(newValue, oldValue) {
-    if (newValue === undefined) throw new Error('Do not use undefined!');
-    if (newValue === null) {
+    if (newValue === null || newValue === undefined) {
       this.$element.val('');
-      this.value = null;
+      this.value = undefined;
       return;
     }
 

@@ -46,15 +46,10 @@ export class Datepicker {
   }
 
   valueChanged(newValue, oldValue) {
-    if (newValue === null || newValue === undefined) {
+    if (newValue === null || newValue === undefined || newValue === false || newValue.isValid() !== true) {
       var input = this.element.firstElementChild.firstElementChild;
       input.value = '';
       return;
-    }
-
-    // check if date is valid and moment object
-    if (newValue.isValid() !== true) {
-      throw new Error('This has to be moment type!');
     }
 
     if (newValue.isSame(oldValue)) {

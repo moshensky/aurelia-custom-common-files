@@ -47,11 +47,12 @@ export class Timepicker {
   }
 
   valueChanged(newValue, oldValue) {
-    if (newValue === null || newValue === undefined) {
+    if (newValue === null || newValue === undefined || newValue === false) {
       this.$element.val('');
       this.value = undefined;
       return;
     }
+
 
     if (newValue.constructor.name !== "Timespan") {
       throw new Error('This has to be moment type.');

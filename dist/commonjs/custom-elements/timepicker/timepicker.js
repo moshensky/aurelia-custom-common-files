@@ -48,7 +48,7 @@ var Timepicker = (function () {
 
     var div = this.element.firstElementChild;
     var input = div.firstElementChild;
-    this.$element = (0, _jquery2['default'])(div);
+    this.$element = _jquery2['default'](div);
     this.options = this.options || {};
     if (this.options.format !== undefined) {
       delete this.options.format;
@@ -73,7 +73,7 @@ var Timepicker = (function () {
   };
 
   _Timepicker.prototype.valueChanged = function valueChanged(newValue, oldValue) {
-    if (newValue === null || newValue === undefined) {
+    if (newValue === null || newValue === undefined || newValue === false) {
       this.$element.val('');
       this.value = undefined;
       return;
@@ -88,28 +88,28 @@ var Timepicker = (function () {
       return;
     }
 
-    var timeAsMoment = (0, _moment2['default'])(newValue.toString(), 'HH:mm');
+    var timeAsMoment = _moment2['default'](newValue.toString(), 'HH:mm');
     this.$element.data('DateTimePicker').date(timeAsMoment);
   };
 
   _createDecoratedClass(_Timepicker, [{
     key: 'value',
     decorators: [_aureliaFramework.bindable],
-    initializer: function () {
+    initializer: function initializer() {
       return null;
     },
     enumerable: true
   }, {
     key: 'options',
     decorators: [_aureliaFramework.bindable],
-    initializer: function () {
+    initializer: function initializer() {
       return null;
     },
     enumerable: true
   }], null, _instanceInitializers);
 
-  Timepicker = (0, _aureliaFramework.inject)(Element)(Timepicker) || Timepicker;
-  Timepicker = (0, _aureliaFramework.customElement)('timepicker')(Timepicker) || Timepicker;
+  Timepicker = _aureliaFramework.inject(Element)(Timepicker) || Timepicker;
+  Timepicker = _aureliaFramework.customElement('timepicker')(Timepicker) || Timepicker;
   return Timepicker;
 })();
 

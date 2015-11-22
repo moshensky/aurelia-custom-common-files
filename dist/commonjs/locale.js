@@ -1,6 +1,10 @@
 'use strict';
 
-exports.__esModule = true;
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
@@ -12,32 +16,37 @@ var Locale = (function () {
     this.currentLocale = data;
   }
 
-  Locale.prototype.getValueFor = function getValueFor(identifier, category) {
-    if (this.currentLocale && this.currentLocale[category]) {
-      var currentLocaleSetting = this.currentLocale[category][identifier];
-      if (currentLocaleSetting !== undefined && currentLocaleSetting !== null) return currentLocaleSetting;
+  _createClass(Locale, [{
+    key: 'getValueFor',
+    value: function getValueFor(identifier, category) {
+      if (this.currentLocale && this.currentLocale[category]) {
+        var currentLocaleSetting = this.currentLocale[category][identifier];
+        if (currentLocaleSetting !== undefined && currentLocaleSetting !== null) return currentLocaleSetting;
+      }
+      if (this.defaults[category]) {
+        var defaultSetting = this.defaults[category][identifier];
+        if (defaultSetting !== undefined && defaultSetting !== null) return defaultSetting;
+      }
+      throw 'validation: I18N: Could not find: ' + identifier + ' in category: ' + category;
     }
-    if (this.defaults[category]) {
-      var defaultSetting = this.defaults[category][identifier];
-      if (defaultSetting !== undefined && defaultSetting !== null) return defaultSetting;
+  }, {
+    key: 'setting',
+    value: function setting(settingIdentifier) {
+      return this.getValueFor(settingIdentifier, 'settings');
     }
-    throw 'validation: I18N: Could not find: ' + identifier + ' in category: ' + category;
-  };
-
-  Locale.prototype.setting = function setting(settingIdentifier) {
-    return this.getValueFor(settingIdentifier, 'settings');
-  };
-
-  Locale.prototype.translate = function translate(translationIdentifier, newValue, threshold) {
-    var translation = this.getValueFor(translationIdentifier, 'messages');
-    if (typeof translation === 'function') {
-      return translation(newValue, threshold);
+  }, {
+    key: 'translate',
+    value: function translate(translationIdentifier, newValue, threshold) {
+      var translation = this.getValueFor(translationIdentifier, 'messages');
+      if (typeof translation === 'function') {
+        return translation(newValue, threshold);
+      }
+      if (typeof translation === 'string') {
+        return translation;
+      }
+      throw 'Validation message for ' + translationIdentifier + 'was in an unsupported format';
     }
-    if (typeof translation === 'string') {
-      return translation;
-    }
-    throw 'Validation message for ' + translationIdentifier + 'was in an unsupported format';
-  };
+  }]);
 
   return Locale;
 })();
@@ -56,30 +65,34 @@ var LocaleRepository = (function () {
     };
   }
 
-  LocaleRepository.prototype.load = function load(localeIdentifier, basePath) {
-    var _this = this;
+  _createClass(LocaleRepository, [{
+    key: 'load',
+    value: function load(localeIdentifier, basePath) {
+      var _this = this;
 
-    if (!basePath) basePath = 'aurelia-custom-app-common-files/resources/';
+      if (!basePath) basePath = 'aurelia-custom-app-common-files/resources/';
 
-    return new Promise(function (resolve, reject) {
-      if (_this.instances.has(localeIdentifier)) {
-        var locale = _this.instances.get(localeIdentifier);
-        resolve(locale);
-      } else {
-        System['import'](basePath + localeIdentifier).then(function (resource) {
-          var locale = _this.addLocale(localeIdentifier, resource.data);
+      return new Promise(function (resolve, reject) {
+        if (_this.instances.has(localeIdentifier)) {
+          var locale = _this.instances.get(localeIdentifier);
           resolve(locale);
-        });
-      }
-    });
-  };
-
-  LocaleRepository.prototype.addLocale = function addLocale(localeIdentifier, data) {
-    var instance = new Locale(this.defaults, data);
-    this.instances.set(localeIdentifier, instance);
-    if (this['default'] === null) this['default'] = instance;
-    return instance;
-  };
+        } else {
+          System['import'](basePath + localeIdentifier).then(function (resource) {
+            var locale = _this.addLocale(localeIdentifier, resource.data);
+            resolve(locale);
+          });
+        }
+      });
+    }
+  }, {
+    key: 'addLocale',
+    value: function addLocale(localeIdentifier, data) {
+      var instance = new Locale(this.defaults, data);
+      this.instances.set(localeIdentifier, instance);
+      if (this['default'] === null) this['default'] = instance;
+      return instance;
+    }
+  }]);
 
   return LocaleRepository;
 })();

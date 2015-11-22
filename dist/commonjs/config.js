@@ -1,6 +1,10 @@
 'use strict';
 
-exports.__esModule = true;
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
@@ -32,65 +36,75 @@ var Config = (function () {
     this.changedHandlers = new Map();
   }
 
-  Config.prototype.getValue = function getValue(identifier) {
-    if (this.values.hasOwnProperty(identifier) !== null && this.values[identifier] !== undefined) {
-      return this.values[identifier];
+  _createClass(Config, [{
+    key: 'getValue',
+    value: function getValue(identifier) {
+      if (this.values.hasOwnProperty(identifier) !== null && this.values[identifier] !== undefined) {
+        return this.values[identifier];
+      }
+      if (this.innerConfig !== null) {
+        return this.innerConfig.getValue(identifier);
+      }
+      throw Error('Config not found: ' + identifier);
     }
-    if (this.innerConfig !== null) {
-      return this.innerConfig.getValue(identifier);
+  }, {
+    key: 'setValue',
+    value: function setValue(identifier, value) {
+      this.values[identifier] = value;
+      return this;
     }
-    throw Error('Config not found: ' + identifier);
-  };
+  }, {
+    key: 'onLocaleChanged',
+    value: function onLocaleChanged(callback) {
+      var _this = this;
 
-  Config.prototype.setValue = function setValue(identifier, value) {
-    this.values[identifier] = value;
-    return this;
-  };
+      if (this.innerConfig !== undefined) {
+        return this.innerConfig.onLocaleChanged(callback);
+      } else {
+        var _ret = (function () {
+          var id = ++ValidationConfig.uniqueListenerId;
+          _this.changedHandlers.set(id, callback);
+          return {
+            v: function () {
+              _this.changedHandlers['delete'](id);
+            }
+          };
+        })();
 
-  Config.prototype.onLocaleChanged = function onLocaleChanged(callback) {
-    var _this = this;
-
-    if (this.innerConfig !== undefined) {
-      return this.innerConfig.onLocaleChanged(callback);
-    } else {
-      var _ret = (function () {
-        var id = ++ValidationConfig.uniqueListenerId;
-        _this.changedHandlers.set(id, callback);
-        return {
-          v: function () {
-            _this.changedHandlers['delete'](id);
-          }
-        };
-      })();
-
-      if (typeof _ret === 'object') return _ret.v;
+        if (typeof _ret === 'object') return _ret.v;
+      }
     }
-  };
-
-  Config.prototype.getDependencies = function getDependencies() {
-    return this.getValue('dependencies');
-  };
-
-  Config.prototype.setHttpService = function setHttpService(httpOpts) {
-    Config.httpOpts = httpOpts;
-  };
-
-  Config.prototype.routerAuthStep = function routerAuthStep(opts) {
-    Config.routerAuthStepOpts = opts;
-  };
-
-  Config.prototype.useLocale = function useLocale(localeIdentifier) {
-    this.setValue('locale', localeIdentifier);
-    var callbacks = Array.from(this.changedHandlers.values());
-    for (var i = 0; i < callbacks.length; i++) {
-      callbacks[i]();
+  }, {
+    key: 'getDependencies',
+    value: function getDependencies() {
+      return this.getValue('dependencies');
     }
-    return this;
-  };
-
-  Config.prototype.locale = function locale() {
-    return _locale.Locale.Repository.load(this.getValue('locale'), this.getValue('localeResources'));
-  };
+  }, {
+    key: 'setHttpService',
+    value: function setHttpService(httpOpts) {
+      Config.httpOpts = httpOpts;
+    }
+  }, {
+    key: 'routerAuthStep',
+    value: function routerAuthStep(opts) {
+      Config.routerAuthStepOpts = opts;
+    }
+  }, {
+    key: 'useLocale',
+    value: function useLocale(localeIdentifier) {
+      this.setValue('locale', localeIdentifier);
+      var callbacks = Array.from(this.changedHandlers.values());
+      for (var i = 0; i < callbacks.length; i++) {
+        callbacks[i]();
+      }
+      return this;
+    }
+  }, {
+    key: 'locale',
+    value: function locale() {
+      return _locale.Locale.Repository.load(this.getValue('locale'), this.getValue('localeResources'));
+    }
+  }]);
 
   return Config;
 })();

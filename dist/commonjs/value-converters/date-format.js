@@ -1,6 +1,10 @@
 'use strict';
 
-exports.__esModule = true;
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -15,12 +19,15 @@ var DateFormatValueConverter = (function () {
     _classCallCheck(this, DateFormatValueConverter);
   }
 
-  DateFormatValueConverter.prototype.toView = function toView(value, format) {
-    if (format) {
-      return _moment2['default'](value).format(format);
+  _createClass(DateFormatValueConverter, [{
+    key: 'toView',
+    value: function toView(value, format) {
+      if (format) {
+        return (0, _moment2['default'])(value).format(format);
+      }
+      return (0, _moment2['default'])(value).format('LL');
     }
-    return _moment2['default'](value).format('LL');
-  };
+  }]);
 
   return DateFormatValueConverter;
 })();

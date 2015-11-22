@@ -22,18 +22,17 @@
       "lib": "dist/system"
     },
     "dependencies": {
-      "Eonasdan/bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker@^4.14.30",
-      "aurelia-dependency-injection": "github:aurelia/dependency-injection@^0.10.1",
-      "aurelia-framework": "github:aurelia/framework@^0.16.0",
-      "aurelia-validation": "github:aurelia/validation@^0.3.1",
+      "Eonasdan/bootstrap-datetimepicker": "github:Eonasdan/bootstrap-datetimepicker@^4.17.37",
+      "aurelia-framework": "npm:aurelia-framework@^1.0.0-beta.1.0.1",
+      "aurelia-validation": "npm:aurelia-validation@^0.6.0",
       "jquery": "github:components/jquery@^2.1.4",
-      "moment": "github:moment/moment@^2.10.3",
+      "moment": "npm:moment@^2.10.6",
       "select2": "github:select2/select2@^4.0.0"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.1.13",
-      "babel-runtime": "npm:babel-runtime@^5.1.13",
-      "core-js": "npm:core-js@^0.9.4"
+      "babel": "npm:babel-core@5.8.34",
+      "babel-runtime": "npm:babel-runtime@5.8.34",
+      "core-js": "npm:core-js@^1.2.6"
     }
   },
   "devDependencies": {

@@ -1,6 +1,10 @@
 'use strict';
 
-exports.__esModule = true;
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
@@ -30,30 +34,34 @@ var Timespan = (function () {
     this.minutes = minutes;
   }
 
-  Timespan.prototype.toString = function toString() {
-    var result = '';
-    if (this.hours < 10) {
-      result += '0';
+  _createClass(Timespan, [{
+    key: 'toString',
+    value: function toString() {
+      var result = '';
+      if (this.hours < 10) {
+        result += '0';
+      }
+
+      result += this.hours + ':';
+
+      if (this.minutes < 10) {
+        result += '0';
+      }
+
+      result += this.minutes;
+
+      return result;
     }
+  }, {
+    key: 'equals',
+    value: function equals(other) {
+      if (other === undefined || other === null) {
+        return false;
+      }
 
-    result += this.hours + ':';
-
-    if (this.minutes < 10) {
-      result += '0';
+      return this.hours === other.hours && this.minutes === other.minutes;
     }
-
-    result += this.minutes;
-
-    return result;
-  };
-
-  Timespan.prototype.equals = function equals(other) {
-    if (other === undefined || other === null) {
-      return false;
-    }
-
-    return this.hours === other.hours && this.minutes === other.minutes;
-  };
+  }]);
 
   return Timespan;
 })();

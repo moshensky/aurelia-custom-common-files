@@ -1,21 +1,38 @@
 'use strict';
 
-exports.__esModule = true;
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 exports.configure = configure;
 
 var _config = require('./config');
 
 var _utilsTableValidationViewStrategy = require('./utils/table-validation-view-strategy');
 
-exports.TableValidationViewStrategy = _utilsTableValidationViewStrategy.TableValidationViewStrategy;
+Object.defineProperty(exports, 'TableValidationViewStrategy', {
+  enumerable: true,
+  get: function get() {
+    return _utilsTableValidationViewStrategy.TableValidationViewStrategy;
+  }
+});
 
 var _utilsTimespan = require('./utils/timespan');
 
-exports.Timespan = _utilsTimespan.Timespan;
+Object.defineProperty(exports, 'Timespan', {
+  enumerable: true,
+  get: function get() {
+    return _utilsTimespan.Timespan;
+  }
+});
 
 var _utilsBaseModel = require('./utils/base-model');
 
-exports.BaseModel = _utilsBaseModel.BaseModel;
+Object.defineProperty(exports, 'BaseModel', {
+  enumerable: true,
+  get: function get() {
+    return _utilsBaseModel.BaseModel;
+  }
+});
 
 function configure(aurelia, configCallback) {
   var config = new _config.Config();

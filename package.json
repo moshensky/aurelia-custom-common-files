@@ -26,8 +26,7 @@
       "aurelia-framework": "npm:aurelia-framework@^1.0.0-beta.1.0.1",
       "aurelia-validation": "npm:aurelia-validation@^0.6.0",
       "jquery": "github:components/jquery@^2.1.4",
-      "moment": "npm:moment@^2.10.6",
-      "select2": "github:select2/select2@^4.0.0"
+      "moment": "npm:moment@^2.10.6"
     },
     "devDependencies": {
       "babel": "npm:babel-core@5.8.34",

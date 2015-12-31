@@ -22,7 +22,6 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "jquery": "github:components/jquery@2.1.4",
     "moment": "npm:moment@2.10.6",
-    "select2": "github:select2/select2@4.0.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
